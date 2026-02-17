@@ -8,6 +8,7 @@ declare module 'styled-components' {
             marks: string,
             background: string,
             white: string,
+            gray: string,
         },
         fonts:{
             primary:string,
@@ -15,6 +16,7 @@ declare module 'styled-components' {
         },
         hovers:{
             scale:string,
+            transition:string,
         },
     }
 }
