@@ -1,6 +1,15 @@
 import styled from "styled-components";
-import { PxToRem } from "../../../theme/styles";
+import { FlexboxStructure, PxToRem } from "../../../theme/styles";
 
+const ProductData = styled.section`
+    ${FlexboxStructure("column","center","center")};
+    border-radius: 2rem;
+    border: 1px solid ${props => props.theme.colors.marks};
+    transition: all 0.25s ease-in-out;
+    &:hover{
+        transform: scale(1.05);
+    }
+`;
 
 
 
@@ -12,17 +21,14 @@ const ProductContainer = styled.div<{$hasDiscount:boolean}>`
         `"imagen imagen"
         "nombre nombre"
         "precio descuento"
-        "total total"
-        "boton boton"` : 
+        "total total"` : 
         `"imagen"
         "nombre"
-        "precio"
-        "boton"`
+        "precio"`
     };
     justify-content: center;
     align-items: center;
     border-radius: 2rem;
-    border: 1px solid ${props => props.theme.colors.marks};
     overflow: hidden;
 `;
 
@@ -82,7 +88,6 @@ const ProductDiscount = styled.h4`
 `;
 
 const ProductButton = styled.button`
-    grid-area: boton;
     width: auto;
     background-color: ${props => props.theme.colors.marks};
     color: ${props => props.theme.colors.white};
@@ -97,6 +102,7 @@ const ProductButton = styled.button`
 `;
 
 export {
+    ProductData,
     ProductContainer,
     ProductImagen,
     ProductTitle,
