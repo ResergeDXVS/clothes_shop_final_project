@@ -1,0 +1,27 @@
+.carousel-item img {
+    height: 300px;
+    object-fit: cover;
+    filter: brightness(70%);
+}
+
+.carousel-caption{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:1rem;
+    
+}
+
+.carousel-caption h5{
+    font-family: "Stack Sans Notch", sans-serif ;
+    font-size: 48px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+.carousel-caption p{
+    font-family: "Stack Sans Text", sans-serif ;
+    font-size: 28px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
