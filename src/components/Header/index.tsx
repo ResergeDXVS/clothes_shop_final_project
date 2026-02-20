@@ -1,9 +1,13 @@
-import React from "react"
-import { HeaderBase, HeaderIcons, HeaderLogo, HeaderOptions } from "./styles";
+import React, { useState } from "react"
+import { HeaderBase, HeaderIcons, HeaderLogo, HeaderOptions, HeaderUserContainer } from "./styles";
 import HeaderSearch from "./HeaderSearch";
+import HeaderLogin from "./HeaderLogin";
+import { UserContainer } from "./HeaderLogin/styles";
 
 
 const Header = () => {
+    const [showLogin, setShowLogin] = useState(false);
+    
     return(
         <HeaderBase>
             <HeaderLogo>
@@ -19,10 +23,17 @@ const Header = () => {
                 <a>Accesorios</a>
             </HeaderOptions>
             <HeaderIcons>
-                <div>
+                <div id="icon-user" 
+                    onClick={() => setShowLogin(prev => !prev)}>
                     <i className="fi fi-rs-user"></i>
+                    <UserContainer className={showLogin ? "user--show" : ""}>
+                        <HeaderLogin />
+                    </UserContainer>
                 </div>
-                <div>
+
+
+
+                <div className="icon-bag">
                     <i className="fi fi-rs-shopping-bag"></i>
                 </div>
             </HeaderIcons>
