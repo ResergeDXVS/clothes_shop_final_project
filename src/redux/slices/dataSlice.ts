@@ -30,10 +30,11 @@ const initialState: DataState = {
         { id: 10, name: "SEGA", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/SEGA_logo.svg/1280px-SEGA_logo.svg.png" },
     ],
     categories:[
-        {id:1,category:"Juegos"},
-        {id:2,category:"Controles"},
-        {id:3,category:"Pases"},
-        {id:4,category:"Accesorios"},
+        {id:1,category:"Consolas"},
+        {id:2,category:"Juegos"},
+        {id:3,category:"Controles"},
+        {id:4,category:"Pases"},
+        {id:5,category:"Accesorios"},
     ],
 }
 

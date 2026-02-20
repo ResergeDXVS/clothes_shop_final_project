@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { FormState } from "../../components/User/UserCreate";
 import { LoginState } from "../../components/User/UserLogin";
 
@@ -7,7 +7,6 @@ export const usersInfo = "userList";
 
 export type User = {
     id: number;
-    isLogged: boolean;
     name: string;
     paternal_surname: string;
     maternal_surname: string | null;
@@ -53,17 +52,16 @@ export const createUserThunk = createAsyncThunk<User, FormState, { state: { user
 
         const idAux = state.user.users.length + 1;
         const user: User = {
-        id: idAux,
-        isLogged: false,
-        name: form.name.toUpperCase(),
-        paternal_surname: form.paternal_surname.toUpperCase(),
-        maternal_surname: form.maternal_surname
-            ? form.maternal_surname.toUpperCase()
-            : "",
-        rfc: form.rfc.toUpperCase(),
-        datebirth: form.datebirth,
-        email: form.email,
-        password: form.password,
+            id: idAux,
+            name: form.name.toUpperCase(),
+            paternal_surname: form.paternal_surname.toUpperCase(),
+            maternal_surname: form.maternal_surname
+                ? form.maternal_surname.toUpperCase()
+                : "",
+            rfc: form.rfc.toUpperCase(),
+            datebirth: form.datebirth,
+            email: form.email,
+            password: form.password,
         };
 
         const updatedUsers = [...state.user.users, user];

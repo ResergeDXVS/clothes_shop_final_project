@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import UserLogin from './components/User/UserLogin';
 import Main from './components/Body/Main';
 import ProductDetail from './components/Body/Products/ProductDetail';
+import ProductNavigate from './components/Body/Products/ProductNavigate';
 function App() {
 	return (
 		<ThemeProvider theme={Theme}>
@@ -31,6 +32,10 @@ function App() {
 					<Route
 						path="/cart/:id"
 						element={<cartView/>}
+					/>
+					<Route
+						path="/products/"
+						element={<ProductNavigate/>}
 					/>
 				</Routes>
 			</div>

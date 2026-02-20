@@ -1,11 +1,10 @@
 import React, { useState } from "react"
-import { HeaderBase, HeaderIcons, HeaderLogo, HeaderOptions, HeaderUserContainer } from "./styles";
+import { HeaderBase, HeaderIcons, HeaderLogo, HeaderOptions } from "./styles";
 import HeaderSearch from "./HeaderSearch";
 import HeaderLogin from "./HeaderLogin";
 import { UserContainer } from "./HeaderLogin/styles";
-import { loginUserText } from "../../redux/slices/userSlice";
 import { useAppSelector } from "../../redux/store/store";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Header = () => {
@@ -20,11 +19,11 @@ const Header = () => {
                 <p>GAME DEX</p>
             </HeaderLogo>
             <HeaderOptions>
-                <a>Consolas</a>
-                <a>Juegos</a>
-                <a>Controles</a>
-                <a>Pases</a>
-                <a>Accesorios</a>
+                <Link to="/products?type=1">Consolas</Link>
+                <Link to="/products?type=2">Juegos</Link>
+                <Link to="/products?type=3">Controles</Link>
+                <Link to="/products?type=4">Pases</Link>
+                <Link to="/products?type=5">Accesorios</Link>
             </HeaderOptions>
             <HeaderIcons>
                 <div id="icon-user" 

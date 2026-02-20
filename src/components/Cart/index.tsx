@@ -6,7 +6,8 @@ import { useAppSelector } from "../../redux/store/store";
 const Cart = () => {
     const param = useParams<{id:string}>();
     const carts = useAppSelector(state => state.cart.carts);
-    const userCart = carts.filter(cart => cart.user_id.id === Number(param) && cart.user_id.isLogged)
+    const actualUser = useAppSelector(state=>state.user.actualUser);
+    const userCart = carts.filter(cart => cart.user_id === Number(param));
 
     const cartView = () => (
         <Fragment>
@@ -78,10 +79,24 @@ const Cart = () => {
         </Fragment>
     );
 
+    const emptyCart = () => (
+        <Fragment>
+            <UserHeader/>
+            <CartContainer>
+                <CartTitle>
+                    Tu carrito está vacio, date una vuelta por la página ;)  
+                </CartTitle>
+            </CartContainer>
+        </Fragment>
+    );
+
     return(
         ()=> {
-            if(userCart) return cartView();
-            else return errorView();
+            if(!actualUser) return errorView();
+            else{
+                if(userCart.length>0) return cartView();
+                else if (userCart.length===0) return emptyCart();
+            }
         }
     );
 }

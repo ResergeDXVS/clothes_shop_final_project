@@ -16,7 +16,6 @@ const Product = ({product}:ProductProps) =>{
     const addProduct = (product:Products) => {
         if(user){
             dispatch(addCart({user,product}));
-            
         }else{
             console.log("dadsada");
             const alert = document.getElementById("alert_product")
@@ -39,20 +38,23 @@ const Product = ({product}:ProductProps) =>{
                         alt={product.name}/>
                 </ProductImagen>
                 <ProductTitle>{product.name}</ProductTitle>
-                <ProductPrice 
-                    $isTotal={!!product.promotion}>
-                    ${product.price}
-                </ProductPrice>
+                
                 {
                     product.promotion && (
                         <>
                             <ProductDiscount>{product.promotion}%</ProductDiscount>
-                            <ProductPrice $isTotal={false}>
-                                ${(product?.price * (1-(product?.promotion/100))).toFixed(2)}
+                            <ProductPrice 
+                                $isTotal={false}>
+                                ${product.price}
                             </ProductPrice>
                         </>
                     )
                 }
+                <ProductPrice 
+                    $isTotal={true}>
+                        ${((product.price * (1-(product.promotion/100)))).toFixed(2)}
+                    
+                </ProductPrice>
                 <ProductButton
                     onClick={()=>addProduct(product)}>
                         Guardar al carrito

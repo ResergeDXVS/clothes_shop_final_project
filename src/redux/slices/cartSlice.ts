@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Products } from "./productSlice"
-import { User } from "./userSlice"
+import { createUserThunk, User } from "./userSlice"
 
 export const storageCarts = "storageCarts";
 
@@ -10,7 +10,7 @@ export type Items = {
 }
 
 export type Cart = {
-    user_id: User,
+    user_id: number,
     product_ids: Items[],
     total: number,
 }
@@ -31,7 +31,7 @@ const cartSlice = createSlice({
     reducers:{
         addCart:(state,action:PayloadAction<{user:User,product:Products}>)=>{
             
-            const cart = state.carts.find((cart:Cart)=> cart.user_id.id===action.payload.user.id);
+            const cart = state.carts.find((cart:Cart)=> cart.user_id===action.payload.user.id);
             if(cart){
                 const item = cart.product_ids.find((product:Items)=> product.product.id === action.payload.product.id);
                 if (item){
@@ -48,10 +48,21 @@ const cartSlice = createSlice({
             }
         },
         clearCart:(state,action:PayloadAction<User>)=>{
-            const cart = state.carts.find((cart:Cart)=> cart.user_id.id===action.payload.id);
+            const cart = state.carts.find((cart:Cart)=> cart.user_id===action.payload.id);
             if (cart) cart.product_ids = [];
         }
     },
+    extraReducers: builder => {
+        builder.addCase(createUserThunk.fulfilled, (state, action) => {
+            state.carts.push({
+                user_id: action.payload.id,
+                product_ids: [],
+                total: 0,
+            });
+            localStorage.setItem(storageCarts, JSON.stringify(state.carts));
+        });
+    }
+
 });
 
 export const { addCart,clearCart } = cartSlice.actions;

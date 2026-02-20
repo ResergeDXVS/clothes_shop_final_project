@@ -65,6 +65,9 @@ const ProductPrice = styled.h4<{$isTotal:boolean}>`
     margin-bottom: .25rem;
     text-align:center;
     text-decoration: ${({ $isTotal}) => !$isTotal ? `line-through`:`none`};
+    color:${({ $isTotal, theme })=> $isTotal ?
+        `${ theme.colors.buttons }` : 
+        `${ theme.colors.background }`}; 
 `;
 
 const ProductDiscount = styled.h4`
