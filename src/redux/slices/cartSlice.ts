@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Products } from "./productSlice"
 import { User } from "./userSlice"
 
+export const storageCarts = "storageCarts";
 
 export type Items = {
     product: Products,
@@ -19,7 +20,9 @@ export interface CartStates {
 }
 
 const initialState: CartStates = {
-    carts: [],
+    carts: localStorage.getItem(storageCarts)
+        ? JSON.parse(localStorage.getItem(storageCarts) as string)
+        : null,
 }
 
 const cartSlice = createSlice({
@@ -27,6 +30,7 @@ const cartSlice = createSlice({
     initialState,
     reducers:{
         addCart:(state,action:PayloadAction<{user:User,product:Products}>)=>{
+            
             const cart = state.carts.find((cart:Cart)=> cart.user_id.id===action.payload.user.id);
             if(cart){
                 const item = cart.product_ids.find((product:Items)=> product.product.id === action.payload.product.id);
@@ -50,6 +54,6 @@ const cartSlice = createSlice({
     },
 });
 
-
+export const { addCart,clearCart } = cartSlice.actions;
 const { reducer: cartReducer } = cartSlice;
 export default cartReducer;

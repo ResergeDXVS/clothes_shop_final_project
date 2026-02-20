@@ -3,6 +3,7 @@ import { FlexboxStructure, PxToRem } from "../../theme/styles";
 
 interface FormCheck {
     $invalid: boolean|null, 
+    $capitalize: boolean|null,
 }
 
 
@@ -60,7 +61,7 @@ const UserFormInput = styled.input<FormCheck>`
     grid-area: input;
     flex-grow: 1;
     font-size: ${PxToRem(22)};
-    text-transform: uppercase;
+    text-transform: ${({ $capitalize }) => $capitalize ? `uppercase` : 'none'};
     border: 3px solid ${props => props.theme.colors.gray};
     color: ${props => props.theme.colors.background};
     background-color: ${props => props.theme.colors.white};

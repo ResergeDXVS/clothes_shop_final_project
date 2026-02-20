@@ -86,6 +86,17 @@ const HeaderIcons = styled.div`
             text-align: center;
             line-height: 1;
         }
+        h1{
+            font-size: ${PxToRem(36)};   
+            color: ${props => props.theme.colors.white}; 
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            line-height: 1;
+            font-weight: 700;
+            margin: 0;
+        }
+        
     }
     #icon-user{
         position: relative;

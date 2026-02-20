@@ -28,10 +28,10 @@ const ProductContainer = styled.div<{$hasDiscount:boolean}>`
 
 const ProductImagen = styled.div`
     grid-area: imagen;
-    aspect-ratio: 9/16;
     border-radius: 1rem;
     padding: 1rem;
     width: 100%;
+    height: 560px;
     overflow: hidden;
     box-sizing: border-box;
     img {

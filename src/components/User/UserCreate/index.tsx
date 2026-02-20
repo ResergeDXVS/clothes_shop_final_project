@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { UserContainerForm, UserCreateTitle, UserFormButtonSubmit, UserFormFeedback, UserFormFieldset, UserFormInput, UserFormLabel, UserFormLine } from "../styles";
-import { useDispatch } from "react-redux";
-import { createUser } from "../../../redux/slices/userSlice";
+import {  createUserThunk } from "../../../redux/slices/userSlice";
 import { UserHeader, UserHeaderLogo } from "../../Header/HeaderMin/styles";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../redux/store/store";
+import Alert from "../../Alert";
 
 export type FormState = {
     name: string,
@@ -16,8 +18,10 @@ export type FormState = {
 };
 
 const UserCreate = () => {
+    const navigate = useNavigate();
     const [submitted, setSubmitted] = useState<boolean|null>(null);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
+    const actualUser = useAppSelector(state => state.user.actualUser);
     const [form, setForm] = useState<FormState>({
         name: "",
         paternal_surname: "",
@@ -33,30 +37,24 @@ const UserCreate = () => {
         setForm(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!form.name ||
-            !form.paternal_surname ||
-            !form.rfc ||
-            !form.datebirth ||
-            !form.email ||
-            !form.password) {
-                setSubmitted(true);
-            return;
+   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        const result = await dispatch(createUserThunk(form));
+        if (createUserThunk.fulfilled.match(result)) {
+            console.log("Usuario creado:", result.payload);
+            navigate("/");
+        } else {
+            const alert = document.getElementById("alert_product")
+            alert?.classList.toggle("alert--show");
         }
-        dispatch(createUser(form));
-        setForm({
-            name: "",
-            paternal_surname: "",
-            maternal_surname: "",
-            rfc: "",
-            datebirth: "",
-            email: "",
-            password: "",
-        });
-        setSubmitted(null);
     };
 
+
+    const showAlert = () => {console.log("dadsada");
+        const alert = document.getElementById("alert_product")
+        alert?.classList.toggle("alert--show");
+        
+    }
+    
     return(
         <Fragment>
             <UserHeader>
@@ -77,9 +75,11 @@ const UserCreate = () => {
                             type="text"
                             value={form.name}
                             onChange={handleChange}
-                            $invalid={submitted && !form.name}/>
+                            $invalid={submitted && !form.name}
+                            $capitalize={true}/>
                         <UserFormFeedback
-                            $invalid={submitted && !form.name}>
+                            $invalid={submitted && !form.name}
+                            $capitalize={null}>
                             Ingresa tu nombre
                         </UserFormFeedback>
                     </UserFormLine>
@@ -91,9 +91,11 @@ const UserCreate = () => {
                             type="text"
                             value={form.paternal_surname}
                             onChange={handleChange}
-                            $invalid={submitted && !form.paternal_surname}/>
+                            $invalid={submitted && !form.paternal_surname}
+                            $capitalize={true}/>
                         <UserFormFeedback
-                            $invalid={submitted && !form.paternal_surname}>
+                            $invalid={submitted && !form.paternal_surname}
+                            $capitalize={null}>
                             Ingresa tu apellido paterno
                         </UserFormFeedback>
                     </UserFormLine>
@@ -105,19 +107,22 @@ const UserCreate = () => {
                             type="text"
                             value={form.maternal_surname}
                             onChange={handleChange}
-                            $invalid={null}/>
+                            $invalid={null}
+                            $capitalize={true}/>
                     </UserFormLine>
                     <UserFormLine>
                         <UserFormLabel>Fecha de Nacimiento</UserFormLabel>
                         <UserFormInput
-                            id="datetime"
-                            name="datetime"
-                            type="datetime-local"
+                            id="datebirth"
+                            name="datebirth"
+                            type="date"
                             value={form.datebirth}
                             onChange={handleChange}
-                            $invalid={submitted && !form.datebirth}/>
+                            $invalid={submitted && !form.datebirth}
+                            $capitalize={true}/>
                         <UserFormFeedback
-                            $invalid={submitted && !form.datebirth}>
+                            $invalid={submitted && !form.datebirth}
+                            $capitalize={null}>
                             Debes ser mayor de 18 años
                         </UserFormFeedback>
                     </UserFormLine>
@@ -129,9 +134,11 @@ const UserCreate = () => {
                             type="text"
                             value={form.rfc}
                             onChange={handleChange}
-                            $invalid={submitted && !form.rfc}/>
+                            $invalid={submitted && !form.rfc}
+                            $capitalize={true}/>
                         <UserFormFeedback
-                            $invalid={submitted && !form.rfc}>
+                            $invalid={submitted && !form.rfc}
+                            $capitalize={null}>
                             Ingresa tu RFC válido
                         </UserFormFeedback>
                     </UserFormLine>
@@ -143,9 +150,11 @@ const UserCreate = () => {
                             type="email"
                             value={form.email}
                             onChange={handleChange}
-                            $invalid={submitted && !form.email}/>
+                            $invalid={submitted && !form.email}
+                            $capitalize={false}/>
                         <UserFormFeedback
-                            $invalid={submitted && !form.email}>
+                            $invalid={submitted && !form.email}
+                            $capitalize={null}>
                             Ingresa un correo válido
                         </UserFormFeedback>
                     </UserFormLine>
@@ -157,9 +166,11 @@ const UserCreate = () => {
                             type="password"
                             value={form.password}
                             onChange={handleChange}
-                            $invalid={submitted && !form.password}/>
+                            $invalid={submitted && !form.password}
+                            $capitalize={false}/>
                         <UserFormFeedback
-                            $invalid={submitted && !form.password}>
+                            $invalid={submitted && !form.password}
+                            $capitalize={null}>
                             Ingresa una contraseña minimo de 8 dígitos
                         </UserFormFeedback>
                     </UserFormLine>
@@ -171,6 +182,11 @@ const UserCreate = () => {
                     </UserFormLine>
                 </UserFormFieldset>
             </UserContainerForm>
+            <Alert
+                id="alert_product"
+                title={"Cuenta ya existente"} 
+                message={"El correo ya ha sido utilizado. Favor de ingresar."}
+                action={showAlert}/>
         </Fragment>
     );
 }

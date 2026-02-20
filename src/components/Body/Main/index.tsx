@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import Carousel from "../Carousel";
@@ -8,11 +8,12 @@ import { ProductTitles } from "./styles";
 import { Products } from "../../../redux/slices/productSlice";
 import ProductList from "../Products/ProductList";
 import HeaderLogin from "../../Header/HeaderLogin";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
     const products = useAppSelector(state=>state.product.products);
     let auxList:number[] = [];
-    
+
     function getRandomInt(min:number, max:number) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -29,6 +30,10 @@ const Main = () => {
         return productList;
     }
 
+    
+
+    
+
     return(
         <Fragment>
             <Header/>
@@ -39,9 +44,7 @@ const Main = () => {
                     <ProductList
                         list={generateList()}/>
                 }
-                <HeaderLogin />
             <Footer/>
-            <HeaderLogin/>
         </Fragment>
     );
 }

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { UserContainerForm, UserCreateTitle, UserFormButtonSubmit, UserFormFeedback, UserFormFieldset, UserFormInput, UserFormLabel, UserFormLine } from "../styles";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../../redux/slices/userSlice";
+import { loginUserThunk } from "../../../redux/slices/userSlice";
 import { UserHeader, UserHeaderLogo } from "../../Header/HeaderMin/styles";
+import { useNavigate } from "react-router-dom";
+import Alert from "../../Alert";
+import { useAppDispatch, useAppSelector } from "../../../redux/store/store";
 
 export type LoginState = {
     email: string,
@@ -11,8 +13,11 @@ export type LoginState = {
 };
 
 const UserLogin = () => {
+    const navigate = useNavigate();
     const [submitted, setSubmitted] = useState<boolean|null>(null);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
+    const actualUser = useAppSelector(state => state.user.users);
+    console.log(actualUser);
     const [form, setForm] = useState<LoginState>({
         email:"",
         password:"",
@@ -23,16 +28,28 @@ const UserLogin = () => {
         setForm(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!form.email ||
-            !form.password) {
-                setSubmitted(true);
+        if (!form.email || !form.password) {
+            setSubmitted(true);
             return;
         }
-        dispatch(loginUser(form));
+        const result = await dispatch(loginUserThunk(form));
+        if (loginUserThunk.fulfilled.match(result)) {
+            console.log("Usuario creado:", result.payload);
+            navigate("/");
+        }else{
+            const alert = document.getElementById("alert_product");
+            alert?.classList.toggle("alert--show");
+        }
     };
 
+    const showAlert = () => {console.log("dadsada");
+        const alert = document.getElementById("alert_product")
+        alert?.classList.toggle("alert--show");
+        
+    }
+    
     return(
         <Fragment>
             <UserHeader>
@@ -53,9 +70,11 @@ const UserLogin = () => {
                             type="email"
                             value={form.email}
                             onChange={handleChange}
-                            $invalid={submitted && !form.email}/>
+                            $invalid={submitted && !form.email}
+                            $capitalize={false}/>
                         <UserFormFeedback
-                            $invalid={submitted && !form.email}>
+                            $invalid={submitted && !form.email}
+                            $capitalize={null}>
                             Ingresa un correo válido
                         </UserFormFeedback>
                     </UserFormLine>
@@ -67,9 +86,11 @@ const UserLogin = () => {
                             type="password"
                             value={form.password}
                             onChange={handleChange}
-                            $invalid={submitted && !form.password}/>
+                            $invalid={submitted && !form.password}
+                            $capitalize={false}/>
                         <UserFormFeedback
-                            $invalid={submitted && !form.password}>
+                            $invalid={submitted && !form.password}
+                            $capitalize={null}>
                             Ingresa una contraseña minimo de 8 dígitos
                         </UserFormFeedback>
                     </UserFormLine>
@@ -81,6 +102,11 @@ const UserLogin = () => {
                     </UserFormLine>
                 </UserFormFieldset>
             </UserContainerForm>
+            <Alert
+                id="alert_product"
+                title={"Cuenta o contraseña incorrecta"} 
+                message={"Favor de revisar la información de la cuenta."}
+                action={showAlert}/>
         </Fragment>
     );
 }
