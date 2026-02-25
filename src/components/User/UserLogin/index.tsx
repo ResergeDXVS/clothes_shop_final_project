@@ -13,6 +13,7 @@ export type LoginState = {
 };
 
 const UserLogin = () => {
+    const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate();
     const [submitted, setSubmitted] = useState<boolean|null>(null);
     const dispatch = useAppDispatch();
@@ -39,16 +40,11 @@ const UserLogin = () => {
             console.log("Usuario creado:", result.payload);
             navigate("/");
         }else{
-            const alert = document.getElementById("alert_product");
-            alert?.classList.toggle("alert--show");
+            console.log("gfdafafs")
+            setShowAlert(true);
         }
     };
 
-    const showAlert = () => {console.log("dadsada");
-        const alert = document.getElementById("alert_product")
-        alert?.classList.toggle("alert--show");
-        
-    }
     
     return(
         <Fragment>
@@ -106,7 +102,8 @@ const UserLogin = () => {
                 id="alert_product"
                 title={"Cuenta o contraseña incorrecta"} 
                 message={"Favor de revisar la información de la cuenta."}
-                action={showAlert}/>
+                action={() => setShowAlert(false)}
+                visible={showAlert}/>
         </Fragment>
     );
 }

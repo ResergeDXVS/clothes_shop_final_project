@@ -7,6 +7,8 @@ import UserLogin from './components/User/UserLogin';
 import Main from './components/Body/Main';
 import ProductDetail from './components/Body/Products/ProductDetail';
 import ProductNavigate from './components/Body/Products/ProductNavigate';
+import Cart from './components/Cart';
+import PaymentMethod from './components/Cart/PaymentMethod';
 function App() {
 	return (
 		<ThemeProvider theme={Theme}>
@@ -31,7 +33,11 @@ function App() {
 					/>
 					<Route
 						path="/cart/:id"
-						element={<cartView/>}
+						element={<Cart/>}
+					/>
+					<Route
+						path="/payment/:id"
+						element={<PaymentMethod/>}
 					/>
 					<Route
 						path="/products/"

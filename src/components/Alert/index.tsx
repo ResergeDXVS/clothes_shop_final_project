@@ -5,13 +5,17 @@ type AlertProps = {
     id:string,
     title:string,
     message:string,
-    action:any,
+    action: () => void;
+    visible: boolean;
+
 }
 
 
-const Alert = ({id,title,message,action}:AlertProps) => {
+const Alert = ({id,title,message,action,visible}:AlertProps) => {
+    if (!visible) return null;
+
     return(
-        <AlertContainer id={id}>
+        <AlertContainer id={id} className="alert alert--show">
             <AlertTitle>
                 {title}
             </AlertTitle>

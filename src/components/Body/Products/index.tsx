@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Products } from "../../../redux/slices/productSlice";
 import { ProductButton, ProductContainer, ProductData, ProductDiscount, ProductImagen, ProductPrice, ProductTitle } from "./styles";
 import { useAppSelector } from "../../../redux/store/store";
@@ -12,6 +12,7 @@ interface ProductProps {
 }
 
 const Product = ({product}:ProductProps) =>{
+    const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate();
     const user = useAppSelector(state=>state.user.actualUser);
     const dispatch = useDispatch();
@@ -24,12 +25,6 @@ const Product = ({product}:ProductProps) =>{
             alert?.classList.toggle("alert--show");
         }   
     };
-
-    const showAlert = () => {console.log("dadsada");
-        const alert = document.getElementById("alert_product")
-        alert?.classList.toggle("alert--show");
-        
-    }
 
     const checkDetails = (id:number) => {
         navigate(`/product/${id}`);
@@ -75,7 +70,8 @@ const Product = ({product}:ProductProps) =>{
                 id="alert_product"
                 title={"Acceder a cuenta"} 
                 message={"Se necesita ingresar a la cuenta o crear una para agregar productos al carrito."}
-                action={showAlert}/>
+                action={() => setShowAlert(false)}
+                visible={showAlert}/>
         </Fragment>
     );
 }

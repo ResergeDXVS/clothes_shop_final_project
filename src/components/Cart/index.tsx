@@ -1,28 +1,52 @@
 import React, { Fragment } from "react";
 import { UserHeader, UserHeaderLogo } from "../Header/HeaderMin/styles";
-import { CartContainer, CartDeleteButton, CartPayment, CartProduct, CartProductDiscount, CartProductImage, CartProductName, CartProductNumber, CartProductOriginalPrice, CartProductTotal, CartTitle } from "./styles";
-import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../redux/store/store";
+import { CartContainer, CartDecoration, CartDecorationError, CartDeleteButton, CartPayment, CartProduct, CartProductDiscount, CartProductImage, CartProductName, CartProductNumber, CartProductOriginalPrice, CartProductTotal, CartTitle } from "./styles";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/store/store";
+import { deleteItemCart, updateCart } from "../../redux/slices/cartSlice";
 const Cart = () => {
     const param = useParams<{id:string}>();
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    console.log(param);
     const carts = useAppSelector(state => state.cart.carts);
     const actualUser = useAppSelector(state=>state.user.actualUser);
-    const userCart = carts.filter(cart => cart.user_id === Number(param));
+    const userCart = carts.find(cart => cart.user_id === Number(param.id));
+    console.log(userCart);
+
+    const updateItem = (idItem:number,count:number) =>{
+        if(count === 0){
+            dispatch(deleteItemCart({
+                user:actualUser,
+                id:idItem,
+            }))
+        }else{
+            dispatch(updateCart({
+                user: actualUser,
+                id: idItem,
+                countItem: count
+            }));
+        }
+    }
+
+    const deleteItem  = (idItem:number) =>{
+        dispatch(deleteItemCart({
+            user:actualUser,
+            id:idItem,
+        }))
+    }
+
+    const goPaymentMethod = (id:number) => {
+        navigate(`/payment/${id}`);
+    }
 
     const cartView = () => (
-        <Fragment>
-            <UserHeader>
-                <UserHeaderLogo>
-                    <img src="/img/GAME-DEX-LOGO.png"
-                    alt="GAMES DEX"/>
-                    <p>GAME DEX</p>
-                </UserHeaderLogo>
-            </UserHeader>
-            <CartContainer>
+        <CartContainer>
+            <CartDecoration>
                 <CartTitle>Tu Carrito</CartTitle>
                 {
-                    userCart[0].product_ids && (
-                        userCart[0].product_ids.map(productItem => {
+                    userCart?.product_ids && (
+                        userCart.product_ids.map(productItem => {
                             const { product,count } = productItem;
                             return(
                                 <CartProduct key={product.id}>
@@ -33,7 +57,7 @@ const Cart = () => {
                                         {product.name}
                                     </CartProductName>
                                     <CartProductOriginalPrice>
-                                        {product.price}
+                                        ${product.price}
                                     </CartProductOriginalPrice>
                                     <CartProductDiscount>
                                         {
@@ -48,56 +72,64 @@ const Cart = () => {
                                         min="0"
                                         max="100"
                                         value={count}
+                                        onChange={(e)=>updateItem(product.id,Number(e.target.value))}
                                     />
                                     <CartProductTotal>
                                         ${(count*(product.price * (1-(product.promotion/100)))).toFixed(2)}
                                     </CartProductTotal>
                                     <CartDeleteButton
-                                        className="fi fi-rs-trash cart__button"/>
+                                        className="fi fi-rs-trash cart__button"
+                                        onClick={()=>deleteItem(product.id)}/>
                                 </CartProduct>
                             )
                         })
                     )
                 }
                 <CartPayment>
-                    <button>
-                        Pagar ${userCart[0].total}
+                    <button
+                        onClick={()=>goPaymentMethod(userCart?.user_id || 0)}>
+                        Pagar ${userCart?.total}
                     </button>
                 </CartPayment>
-            </CartContainer>
-        </Fragment>
+            </CartDecoration>
+        </CartContainer>
+
     );
 
     const errorView = () => (
-        <Fragment>
-            <UserHeader/>
-            <CartContainer>
-                <CartTitle>
-                    No se puede acceder al carrito, se necesita iniciar sesión    
-                </CartTitle>
-            </CartContainer>
-        </Fragment>
+        <CartDecorationError>
+            <CartTitle>
+                No se puede acceder al carrito, se necesita iniciar sesión    
+            </CartTitle>
+        </CartDecorationError>
     );
 
     const emptyCart = () => (
-        <Fragment>
-            <UserHeader/>
-            <CartContainer>
-                <CartTitle>
-                    Tu carrito está vacio, date una vuelta por la página ;)  
-                </CartTitle>
-            </CartContainer>
-        </Fragment>
-    );
+        <CartDecorationError>
+            <CartTitle>
+                Tu carrito está vacio, date una vuelta por la página 
+            </CartTitle>
+        </CartDecorationError>
 
+    );
+    const render = () =>{
+        if (!actualUser) return errorView();
+        if (!userCart || !userCart.product_ids || userCart.product_ids.length===0) return emptyCart();
+        else if (userCart.product_ids.length>0) return cartView();
+
+    }
     return(
-        ()=> {
-            if(!actualUser) return errorView();
-            else{
-                if(userCart.length>0) return cartView();
-                else if (userCart.length===0) return emptyCart();
-            }
-        }
+        <Fragment>
+            <UserHeader>
+                <UserHeaderLogo>
+                    <img src="/img/GAME-DEX-LOGO.png"
+                    alt="GAMES DEX"/>
+                    <p>GAME DEX</p>
+                </UserHeaderLogo>
+            </UserHeader>
+            {render()}
+        </Fragment>
+        
     );
 }
 export default Cart;

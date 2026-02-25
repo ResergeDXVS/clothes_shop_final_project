@@ -4,7 +4,7 @@ import { FlexboxStructure, PxToRem } from "../../../theme/styles";
 const UserContainer = styled.div`
     position: absolute;
     top: 120%;
-    right: -165%;
+    right: -100%;
     width: 360px;
     z-index: 10;
     background-color: ${props => props.theme.colors.white};

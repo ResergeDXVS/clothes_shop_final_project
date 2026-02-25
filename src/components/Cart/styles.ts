@@ -4,27 +4,46 @@ import { FlexboxStructure, PxToRem } from "../../theme/styles";
 const CartContainer = styled.section`
     width: auto;
     height: auto;
-    ${FlexboxStructure("row","center","center")};
+    ${FlexboxStructure("column","center","center")};
     font-family: ${props=>props.theme.fonts.primary};
     background: linear-gradient(
-        135deg, 
+        165deg, 
         ${props=>props.theme.colors.background} 50%, 
         ${props=>props.theme.colors.white} 50%);
     gap: 1rem;
-    margin: 1.75rem 4.75rem;
+    padding: 1.75rem 4.75rem;
     
 
+`;
+
+const CartDecorationError = styled.section`
+    ${FlexboxStructure("column","center","stretch")};
+    width: 100%;
+    min-height: 60vh;
+    background-color: ${props=>props.theme.colors.white};
+    padding: 2rem;
+`;
+
+const CartDecoration = styled.section`
+    ${FlexboxStructure("column","space-between","center")};
+    width: 100%;
+    min-height: 60vh;
+    border-radius: 1.5rem;
+    background-color: ${props=>props.theme.colors.gray};
+    padding: 2rem;
+    font-family: ${props=>props.theme.fonts.primary};
 `;
 
 const CartTitle = styled.h1`
     font-size: ${PxToRem(42)};
     font-weight: 700;
     font-family: inherit;
-    color:${props=>props.theme.colors.background};
+    color:${props=>props.theme.colors.buttons};
     width: 100%;
     margin: 1rem 3rem .75rem 3rem;
-    border-bottom: 1px solid ${props=>props.theme.colors.background};
+    border-bottom: 1px solid ${props=>props.theme.colors.white};
     text-transform: uppercase;
+    text-align: center;
 `;
 
 const CartItems = styled.section`
@@ -69,7 +88,7 @@ const CartProductName = styled.p`
     grid-area: title;
     color: ${props=> props.theme.colors.details};
     margin: 0;
-    text-align: center;
+    text-align: left;
     flex-grow: 1;
     white-space: nowrap;
     overflow: hidden;
@@ -133,22 +152,26 @@ const CartDeleteButton = styled.i`
 `;
 
 const CartPayment = styled.div`
+    ${FlexboxStructure("column","center","center")};
     width: 100%;
-    margin: 1rem 3rem 2rem 3rem;
+    margin: 2rem;
     box-sizing: border-box;
     button{
-        width: auto;
-        color:${props=> props.theme.colors.marks};
+        width: 50%;
+        color:${props=> props.theme.colors.white};
         border: 1px solid ${props=> props.theme.colors.marks};
-        background-color:${props=> props.theme.colors.white};
+        background-color:${props=> props.theme.colors.marks};
         box-sizing: border-box;
-        font-size: ${PxToRem(28)};
-        padding: 0.75rem 2rem;
+        font-size: ${PxToRem(32)};
+        padding: .75rem;
+        border-radius: .75rem;
+        font-weight: 700;
     }
 `;
 
 export {
     CartContainer,
+    CartDecoration,
     CartTitle,
     CartItems,
     CartProduct,
@@ -159,5 +182,6 @@ export {
     CartProductNumber,
     CartProductTotal,
     CartDeleteButton,
-    CartPayment
+    CartPayment,
+    CartDecorationError
 }

@@ -40,11 +40,15 @@ const Header = () => {
                 </div>
 
 
-
-                <div className="icon-bag" 
-                    onClick={()=>navigate(`/cart/${username?.id}`)}>
-                    <i className="fi fi-rs-shopping-bag"></i>
-                </div>
+                {
+                    username!== null && (
+                        <div className="icon-bag" 
+                            onClick={()=>navigate(`/cart/${username?.id}`)}>
+                            <i className="fi fi-rs-shopping-bag"></i>
+                        </div>
+                    )
+                }
+                
             </HeaderIcons>
             <HeaderSearch/>
         </HeaderBase>

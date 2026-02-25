@@ -13,6 +13,7 @@ export type Cart = {
     user_id: number,
     product_ids: Items[],
     total: number,
+    payment_id: number | null;
 }
 
 export interface CartStates {
@@ -22,28 +23,85 @@ export interface CartStates {
 const initialState: CartStates = {
     carts: localStorage.getItem(storageCarts)
         ? JSON.parse(localStorage.getItem(storageCarts) as string)
-        : null,
+        : [],
 }
 
 const cartSlice = createSlice({
     name:"cart",
     initialState,
     reducers:{
-        addCart:(state,action:PayloadAction<{user:User,product:Products}>)=>{
-            
-            const cart = state.carts.find((cart:Cart)=> cart.user_id===action.payload.user.id);
-            if(cart){
-                const item = cart.product_ids.find((product:Items)=> product.product.id === action.payload.product.id);
-                if (item){
+        addCart: (state, action: PayloadAction<{ user: User; product: Products }>) => {
+            const cart = state.carts.find((cart: Cart) => cart.user_id === action.payload.user.id);
+            if (cart) {
+                const item = cart.product_ids.find(
+                    (product: Items) => product.product.id === action.payload.product.id
+                );
+
+                if (item) {
                     item.count++;
-                }else{
+                } else {
                     cart.product_ids.push({
-                        product:action.payload.product,
-                        count:1,
+                        product: action.payload.product,
+                        count: 1,
                     });
                 }
-                for(let product of cart.product_ids){
-                    cart.total = Number((product.count * (product.product.price * (1-(product.product.promotion/100)))).toFixed(2));
+
+                cart.total = cart.product_ids.reduce((acc, item) => {
+                    const priceWithPromo = item.product.price * (1 - item.product.promotion / 100);
+                    return acc + item.count * priceWithPromo;
+                }, 0);
+
+                cart.total = Number(cart.total.toFixed(2));
+                localStorage.setItem(storageCarts, JSON.stringify(state.carts));
+            }
+        },
+        updateCart:(state, action: PayloadAction<{user:User | null,id:number,countItem:number}>)=>{
+            if(action.payload.user){
+                const cart = state.carts.find((cart: Cart) => cart.user_id === action.payload.user!.id);
+                if (cart) {
+                    const item = cart.product_ids.find(
+                        (product: Items) => product.product.id === action.payload.id
+                    );
+                    if (item) {
+                        item.count=action.payload.countItem;
+                    }
+                    cart.total = cart.product_ids.reduce((acc, item) => {
+                        const priceWithPromo = item.product.price * (1 - item.product.promotion / 100);
+                        return acc + item.count * priceWithPromo;
+                    }, 0);
+
+                    cart.total = Number(cart.total.toFixed(2));
+                    localStorage.setItem(storageCarts, JSON.stringify(state.carts));
+                }
+            }
+            
+        },
+        addMethod:(state,action: PayloadAction<{user:User | null,payment_id:number}>)=>{
+            if(action.payload.user){
+                const cart = state.carts.find((cart: Cart) => cart.user_id === action.payload.user!.id);
+                if (cart) {
+                    cart.payment_id = action.payload.payment_id;
+                    localStorage.setItem(storageCarts, JSON.stringify(state.carts));
+                }
+            }
+        },
+        deleteItemCart:(state,action: PayloadAction<{user:User | null,id:number}>)=>{
+            if(action.payload.user){
+                const cart = state.carts.find((cart: Cart) => cart.user_id === action.payload.user!.id);
+                if (cart) {
+                    cart.product_ids = cart.product_ids.filter(
+                        (item) => item.product.id !== action.payload.id
+                    );
+
+                    cart.total = cart.product_ids.reduce((acc, item) => {
+                        const priceWithPromo =
+                        item.product.price * (1 - item.product.promotion / 100);
+                        return acc + item.count * priceWithPromo;
+                    }, 0);
+
+                    cart.total = Number(cart.total.toFixed(2));
+                    localStorage.setItem(storageCarts, JSON.stringify(state.carts));
+
                 }
             }
         },
@@ -58,6 +116,7 @@ const cartSlice = createSlice({
                 user_id: action.payload.id,
                 product_ids: [],
                 total: 0,
+                payment_id: null,
             });
             localStorage.setItem(storageCarts, JSON.stringify(state.carts));
         });
@@ -65,6 +124,6 @@ const cartSlice = createSlice({
 
 });
 
-export const { addCart,clearCart } = cartSlice.actions;
+export const { addCart,updateCart,deleteItemCart,clearCart } = cartSlice.actions;
 const { reducer: cartReducer } = cartSlice;
 export default cartReducer;
