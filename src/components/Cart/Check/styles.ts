@@ -3,46 +3,84 @@ import { FlexboxStructure, PxToRem } from "../../../theme/styles";
 
 const CheckContainer = styled.section`
     width: auto;
-    height: auto;
-    ${FlexboxStructure("row","center","center")};
+    height:90vh;
+    ${FlexboxStructure("column","center","center")};
     font-family: ${props=>props.theme.fonts.primary};
-    background: linear-gradient(
-        135deg, 
-        ${props=>props.theme.colors.background} 50%, 
-        ${props=>props.theme.colors.white} 50%);
+    background: ${props=>props.theme.colors.background};
     gap: 1rem;
-    margin: 1.75rem 4.75rem;
+    padding: 2.5rem 3rem;
     
 
 `;
 
+const CheckErrorContainer = styled.section`
+    width: auto;
+    height:70vh;
+    ${FlexboxStructure("column","center","center")};
+    font-family: ${props=>props.theme.fonts.primary};
+    background: ${props=>props.theme.colors.white};
+    gap: 1rem;
+    padding: 2.5rem 3rem;
+`;
+
+const CheckDecoration = styled.section`
+    ${FlexboxStructure("column","space-between","center")};
+    width: auto;
+    background-color: ${props=>props.theme.colors.white};
+    border: 2px solid ${props=>props.theme.colors.background};
+    padding: 2rem;
+    clip-path: polygon(
+        
+        0 0, 5% 5%, 10% 0, 15% 5%, 20% 0, 25% 5%, 30% 0, 35% 5%, 
+        40% 0, 45% 5%, 50% 0, 55% 5%, 60% 0, 65% 5%, 70% 0, 75% 5%, 
+        80% 0, 85% 5%, 90% 0, 95% 5%, 100% 0,
+        
+        100% 95%,
+        
+        95% 100%, 90% 95%, 85% 100%, 80% 95%, 75% 100%, 70% 95%, 
+        65% 100%, 60% 95%, 55% 100%, 50% 95%, 45% 100%, 40% 95%, 
+        35% 100%, 30% 95%, 25% 100%, 20% 95%, 15% 100%, 10% 95%, 
+        5% 100%, 0 95%,
+        
+        0 0
+    );
+    padding: 2rem;
+    font-family: ${props=>props.theme.fonts.primary};
+`;
+
+
 const CheckTitle = styled.h1`
-    font-size: ${PxToRem(42)};
+    font-size: ${PxToRem(38)};
     font-weight: 700;
     font-family: inherit;
     color:${props=>props.theme.colors.background};
     width: 100%;
-    margin: 1rem 3rem .75rem 3rem;
+    padding-top:3rem;
+    padding-bottom: 2rem;
     border-bottom: 4px dotted ${props=>props.theme.colors.background};
     text-transform: uppercase;
+    text-align: center;
+    margin: 0;
 `;
 
 const CheckSubTitle = styled.h2`
-    font-size: ${PxToRem(32)};
+    font-size: ${PxToRem(28)};
     font-weight: 500;
     font-family: ${props=>props.theme.fonts.secondary};
     color:${props=>props.theme.colors.background};
     width: 100%;
-    margin: 1rem 3rem .75rem 3rem;
-    border-bottom: 1px dotted ${props=>props.theme.colors.background};
+    padding-top:1.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px dotted ${props=>props.theme.colors.background};
     text-transform: uppercase;
+    text-align: center;
+    margin: 0;
 `;
 
 const CheckItems = styled.section`
-    ${FlexboxStructure("row","center","center")};
+    ${FlexboxStructure("column","center","center")};
     gap:0.5rem;
-    margin: 1rem 3rem;
-    padding: 0.5rem;
+    padding: 1rem 3rem;
     border-bottom: 1px dotted ${props=>props.theme.colors.background};
 
 `;
@@ -120,9 +158,10 @@ const CheckProductTotal = styled.p`
 
 
 const CheckPayment = styled.div`
-    width: 100%;
-    margin: 1rem 3rem 2rem 3rem;
+    width: auto;
     box-sizing: border-box;
+    padding-top: 2rem;
+    padding-bottom:3.5rem;
     button{
         width: auto;
         color:${props=> props.theme.colors.marks};
@@ -136,6 +175,8 @@ const CheckPayment = styled.div`
 
 export {
     CheckContainer,
+    CheckErrorContainer,
+    CheckDecoration,
     CheckTitle,
     CheckItems,
     CheckProduct,

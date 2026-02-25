@@ -9,6 +9,7 @@ import ProductDetail from './components/Body/Products/ProductDetail';
 import ProductNavigate from './components/Body/Products/ProductNavigate';
 import Cart from './components/Cart';
 import PaymentMethod from './components/Cart/PaymentMethod';
+import Check from './components/Cart/Check';
 function App() {
 	return (
 		<ThemeProvider theme={Theme}>
@@ -36,8 +37,12 @@ function App() {
 						element={<Cart/>}
 					/>
 					<Route
-						path="/payment/:id"
+						path="/payment/"
 						element={<PaymentMethod/>}
+					/>
+					<Route
+						path="/check/"
+						element={<Check/>}
 					/>
 					<Route
 						path="/products/"

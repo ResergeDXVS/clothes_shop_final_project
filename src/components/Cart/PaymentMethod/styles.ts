@@ -3,12 +3,12 @@ import { FlexboxStructure, PxToRem } from "../../../theme/styles";
 
 const PaymentMethodDecoration = styled.section`
     ${FlexboxStructure("column","center","center")};
-    width: 100%;
+    width: auto;
     min-height: 60vh;
     border-radius: 1.5rem;
     border: 2px solid ${p=>p.theme.colors.background};
     background-color: ${p=>p.theme.colors.white};
-    padding: 2rem;
+    padding: 6rem;
 `;
 
 const PaymentMethodTitle = styled.h1`
@@ -29,11 +29,17 @@ const PaymentMethodForm = styled.form`
     margin: 2rem 0;
 `;
 
+const PaymentMethodDiv = styled.div`
+    ${FlexboxStructure("row","center","center")};
+    padding: .75rem 3rem;
+    gap:2rem;
+
+`;
+
 const PaymentMethodInput = styled.input`
-    margin: auto;
-    margin: 1rem;
-    width: 100%;
+    width: auto;
     font-size: ${PxToRem(26)};
+    margin: 0;
 `;
 
 const PaymentMethodLabel = styled.label`
@@ -45,7 +51,7 @@ const PaymentMethodLabel = styled.label`
     
 `;
 
-const PaymentMethodAddButton = styled.button`
+const PaymentMethodAddButton = styled.div`
     ${FlexboxStructure("row","center","center")};
     color: ${p=>p.theme.colors.details};
     background-color: ${p=>p.theme.colors.white};
@@ -54,6 +60,9 @@ const PaymentMethodAddButton = styled.button`
     width: 100%;
     font-size: ${PxToRem(26)};
     gap: 0.75rem;
+    &:hover{
+        cursor: pointer;
+    }
     i{
         font-size: ${PxToRem(26)};    
         display: flex;
@@ -94,5 +103,6 @@ export {
     PaymentMethodInput,
     PaymentMethodLabel,
     PaymentMethodAddButton,
-    PaymentMethodPayment
+    PaymentMethodPayment,
+    PaymentMethodDiv
 }
