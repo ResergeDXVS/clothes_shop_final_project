@@ -14,6 +14,7 @@ export type Cart = {
     product_ids: Items[],
     total: number,
     payment_id: number | null;
+    address_id: number | null;
 }
 
 export interface CartStates {
@@ -85,6 +86,15 @@ const cartSlice = createSlice({
                 }
             }
         },
+        addAddress:(state,action: PayloadAction<{user:User | null,address_id:number}>)=>{
+            if(action.payload.user){
+                const cart = state.carts.find((cart: Cart) => cart.user_id === action.payload.user!.id);
+                if (cart) {
+                    cart.address_id = action.payload.address_id;
+                    localStorage.setItem(storageCarts, JSON.stringify(state.carts));
+                }
+            }
+        },
         deleteItemCart:(state,action: PayloadAction<{user:User | null,id:number}>)=>{
             if(action.payload.user){
                 const cart = state.carts.find((cart: Cart) => cart.user_id === action.payload.user!.id);
@@ -107,7 +117,13 @@ const cartSlice = createSlice({
         },
         clearCart:(state,action:PayloadAction<User>)=>{
             const cart = state.carts.find((cart:Cart)=> cart.user_id===action.payload.id);
-            if (cart) cart.product_ids = [];
+            if (cart){
+                cart.product_ids = [];
+                cart.total = 0;
+                cart.payment_id = null;
+                cart.address_id = null;
+            } 
+
         }
     },
     extraReducers: builder => {
@@ -117,6 +133,7 @@ const cartSlice = createSlice({
                 product_ids: [],
                 total: 0,
                 payment_id: null,
+                address_id: null,
             });
             localStorage.setItem(storageCarts, JSON.stringify(state.carts));
         });
@@ -124,6 +141,6 @@ const cartSlice = createSlice({
 
 });
 
-export const { addCart,updateCart,deleteItemCart,clearCart,addMethod } = cartSlice.actions;
+export const { addCart,updateCart,deleteItemCart,clearCart,addMethod,addAddress } = cartSlice.actions;
 const { reducer: cartReducer } = cartSlice;
 export default cartReducer;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { FlexboxStructure, PxToRem } from "../../../../theme/styles";
 
-const MethodFormBase = styled.div`
+const AddressFormBase = styled.div`
     ${FlexboxStructure("column","center","center")};
     position: fixed;
     left:50%;
@@ -9,15 +9,13 @@ const MethodFormBase = styled.div`
     transform:translateX(-50%);
     padding: 2rem;
     gap:0.5rem;
-    box-shadow: 0 2px 12px rgba(110, 110, 110, 0.2); 
+    box-shadow: 0 2px 12px rgba(36, 36, 36, 0.2); 
     opacity: 0;
     transition: all 0.3s ease-in-out;
-    width: 700px;              /* ancho fijo */
-    aspect-ratio: 85.6 / 53.98; /* ratio oficial */
-    background: linear-gradient(135deg, 
-        ${p=>p.theme.colors.details}, 
-        ${p=>p.theme.colors.white});
-    border-radius: .75rem;        /* esquinas redondeadas */
+    width: 900px;
+    height: 600px;
+    background: ${p=>p.theme.colors.white};
+    border-radius: .1rem;
     color: ${p=>p.theme.colors.background};
     &.form--show{
         opacity: 1;
@@ -25,24 +23,27 @@ const MethodFormBase = styled.div`
     }
 `;
 
-const MethodForm = styled.form`
+const AdressStructureForm = styled.form`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: 
-        "number number number"
-        "expired cvc button"
+        "direccion direccion direccion"
+        "externo interno  postal"
+        "colonia pais button"
     ;
-    margin: .75rem;
+
+    padding: 2rem;
+    border: 2px dashed ${p=>p.theme.colors.buttons};
 `;
 
-const MethodDiv = styled.div<{
-    $grid_name:string,
-    $show_data:boolean | null
-    }>`
+const AddressDiv = styled.div<{$grid_name:string,$show_data:boolean | null}>`
     grid-area: ${({ $grid_name }) => 
-        $grid_name === "number" ? "number" :
-        $grid_name === "expired" ? "expired" :
-        $grid_name === "cvc" ? "cvc" :
+        $grid_name === "direccion" ? "direccion" :
+        $grid_name === "interno" ? "interno" :
+        $grid_name === "externo" ? "externo" :
+        $grid_name === "postal" ? "postal" :
+        $grid_name === "colonia" ? "colonia" :
+        $grid_name === "pais" ? "pais" :
         "auto"
     };
     ${FlexboxStructure("column","flex-start","center")};
@@ -59,7 +60,7 @@ const MethodDiv = styled.div<{
     input{
         background-color: #ffffff00;
         border-radius: .5rem;
-        border:4px solid ${p=>p.theme.colors.white};
+        border:4px solid ${p=>p.theme.colors.buttons};
         font-family: ${p=>p.theme.fonts.secondary};
         font-size: ${PxToRem(28)};
         width: 100%;
@@ -76,14 +77,13 @@ const MethodDiv = styled.div<{
 
     }
 `;
-
-const MethodAddButton = styled.button`
+const AddressAddButton = styled.button`
     grid-area: button;
     align-self: center;
     ${FlexboxStructure("row","center","center")};
     color: ${p=>p.theme.colors.white};
-    background-color: ${p=>p.theme.colors.details};
-    border:1px solid ${p=>p.theme.colors.details};
+    background-color: ${p=>p.theme.colors.buttons};
+    border:1px solid ${p=>p.theme.colors.buttons};
     border-radius: 1rem;
     width: auto;
     height: 50%;
@@ -103,13 +103,13 @@ const MethodAddButton = styled.button`
     }
 `;
 
-const MethodCancel = styled.div`
+const AddressCancel = styled.div`
     align-self: flex-end;
     ${FlexboxStructure("column","center","center")};
-    color: ${p=>p.theme.colors.background};
+    color: ${p=>p.theme.colors.buttons};
     background-color: none;
     i{
-        color: ${p=>p.theme.colors.details};
+        color: ${p=>p.theme.colors.buttons};
         font-size: ${PxToRem(28)};    
         display: flex;
         justify-content: flex-end;
@@ -119,10 +119,12 @@ const MethodCancel = styled.div`
         font-weight: 700;
     }
 `;
-export{
-    MethodFormBase,
-    MethodForm,
-    MethodDiv,
-    MethodAddButton,
-    MethodCancel
+
+
+export {
+    AddressFormBase,
+    AdressStructureForm,
+    AddressDiv,
+    AddressAddButton,
+    AddressCancel,
 }

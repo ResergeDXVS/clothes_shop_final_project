@@ -1,0 +1,172 @@
+import React, { Fragment, useState } from "react";
+import { useAppDispatch } from "../../../../redux/store/store";
+import { AddressMethodState } from "..";
+import { createAddressThunk } from "../../../../redux/slices/addresssSlice";
+import { AddressAddButton, AddressCancel, AddressDiv, AddressFormBase, AdressStructureForm } from "./styles";
+
+type AddressMethodProps = {
+    visible: boolean;
+    onClose: ()=>void;
+    onAlert: ()=>void;
+};
+
+
+
+const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
+    
+    const dispatch = useAppDispatch();
+    const [form, setForm] = useState<AddressMethodState>({
+        address:"",
+        internal_number:"",
+        external_number:"",
+        postal:"",
+        suburb:"",
+        contry:"",
+    });
+    
+
+    const clearAndClose = () => {
+        setForm({
+            address:"",
+            internal_number:"",
+            external_number:"",
+            postal:"",
+            suburb:"",
+            contry:"",
+        })
+        onClose();
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        let newValue = value;
+
+        setForm((prev) => ({ ...prev, [name]: newValue }));
+    };
+
+    const checkData = (type:string, data:string) => {
+        const regexNumber = /^\d{5}$/;
+        if (data==="") return null;
+        if(type==="postal"){    
+            if (!regexNumber.test(data)) return false;
+            else return true;
+        }else {
+            if(data!== "") return null;
+            else return true
+        }
+    }
+
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const result = await dispatch(createAddressThunk(form));
+        if (createAddressThunk.fulfilled.match(result)) {
+            onClose();
+        } else if (createAddressThunk.rejected.match(result)) {
+            onAlert();
+        }
+
+    };
+
+
+
+    return (
+        <Fragment>
+            <AddressFormBase className={ visible ? `form--show`:``}>
+                <AddressCancel
+                    onClick={()=>clearAndClose()}>
+                    <i className="fi fi-rs-x"></i>
+                </AddressCancel>
+                <AdressStructureForm onSubmit={handleSubmit}>
+                    <AddressDiv
+                        $grid_name="direccion"
+                        $show_data={checkData("direccion",form.address)}>
+                        <label>Calle</label>
+                        <input
+                            id="address"
+                            name="address"
+                            type="text"
+                            value={form.address}
+                            onChange={handleChange}
+                        />
+                        <p>Favor de agregar una calle</p>
+                    </AddressDiv>
+                    <AddressDiv
+                        $grid_name="externo"
+                        $show_data={checkData("externo",form.external_number)}>
+                        <label>Número exterior</label>
+                        <input
+                            id="external_number"
+                            name="external_number"
+                            type="text"
+                            value={form.external_number}
+                            onChange={handleChange}
+                        />
+                        <p>Favor de agregar un número exterior</p>
+                    </AddressDiv>
+                    <AddressDiv
+                        $grid_name="interno"
+                        $show_data={null}>
+                        <label>Número Interno</label>
+                        <input
+                            id="internal_number"
+                            name="internal_number"
+                            type="text"
+                            value={form.internal_number}
+                            onChange={handleChange}
+                        />
+                        
+                    </AddressDiv>
+                    <AddressDiv
+                        $grid_name="postal"
+                        $show_data={checkData("postal",form.postal)}>
+                        <label>Código Postal</label>
+                        <input
+                            id="postal"
+                            name="postal"
+                            type="text"
+                            value={form.postal}
+                            maxLength={5}
+                            onChange={handleChange}
+                        />
+                        <p>Favor de agregar código postal válido</p>
+                    </AddressDiv>
+                    <AddressDiv
+                        $grid_name="colonia"
+                        $show_data={checkData("colonia",form.suburb)}>
+                        <label>Colonia</label>
+                        <input
+                            id="suburb"
+                            name="suburb"
+                            type="text"
+                            value={form.suburb}
+                            onChange={handleChange}
+                        />
+                        <p>Favor de agregar la colonia</p>
+                    </AddressDiv>
+                    <AddressDiv
+                        $grid_name="pais"
+                        $show_data={checkData("pais",form.contry)}>
+                        <label>Pais</label>
+                        <input
+                            id="contry"
+                            name="contry"
+                            type="text"
+                            value={form.contry}
+                            onChange={handleChange}
+                        />
+                        <p>Favor de agregar el país</p>
+                    </AddressDiv>
+
+                    <AddressAddButton type="submit">
+                        <i className="fi fi-rs-plus"></i>
+                        <p>Agregar</p>
+                    </AddressAddButton>
+                </AdressStructureForm>
+            </AddressFormBase>
+            
+        </Fragment>
+    );
+};
+
+export default AddressForm;

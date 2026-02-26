@@ -6,7 +6,8 @@ import { useAppDispatch, useAppSelector } from "../../../redux/store/store";
 import { UserHeader, UserHeaderLogo } from "../../Header/HeaderMin/styles";
 import CreditForm from "./CreditForm";
 import Alert from "../../Alert";
-import { addMethod } from "../../../redux/slices/cartSlice";
+import { addAddress, addMethod } from "../../../redux/slices/cartSlice";
+import AddressForm from "./AddressForm";
 
 
 export type FormMethodState = {
@@ -15,23 +16,41 @@ export type FormMethodState = {
     cvc: string,
 };
 
+export type AddressMethodState = {
+    address:string,
+    internal_number:string,
+    external_number:string,
+    postal:string,
+    suburb:string,
+    contry:string,
+}
+
+
 const PaymentMethod = () =>{
     const [showAlertError, setShowAlertError] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [showForm, setShowForm] = useState(false);
+    const [showAddressForm, setShowAddressForm] = useState(false);
     const [selectedCard, setSelectedCard] = useState<number>();
+    const [selectedAddress, setSelectedAddress] = useState<number>();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const payments = useAppSelector(state=>state.payments.payment);
+    const addresses = useAppSelector(state=>state.addresses.address);
     const actualUser = useAppSelector(state=>state.user.actualUser);
     const cards = payments.filter(state=>state.user_id === actualUser?.id);
-    
+    const addressUser = addresses.filter(state=>state.user_id === actualUser?.id) ;
+
     const handlePay = () => {
-        if (selectedCard) {
+        if (selectedCard && selectedAddress) {
             dispatch(addMethod({ 
                 user: actualUser, 
                 payment_id: selectedCard
             }));
+            dispatch(addAddress({
+                user: actualUser, 
+                address_id: selectedAddress
+            }))
 
             navigate("/check/");
         } else {
@@ -42,6 +61,31 @@ const PaymentMethod = () =>{
     const MethodView = () => (
         <CartContainer>
             <PaymentMethodDecoration>
+                {/* Dirección de envio */}
+                <PaymentMethodTitle>Asignar Dirección</PaymentMethodTitle>
+                <PaymentMethodForm>
+                    {addressUser && addressUser.map((address)=>(
+                        <PaymentMethodDiv key={address.id}>
+                            <PaymentMethodInput
+                                type="radio"
+                                id={`${address.id}`}
+                                name="payment_card"
+                                value={`address_${address.id}`}
+                                onChange={(e)=>setSelectedAddress(Number(e.target.id))}
+                            />
+                            <PaymentMethodLabel htmlFor={`${address.id}`}>
+                                {`Calle: ${address.address}, Codigo Postal: ${address.postal}, País: ${address.contry}`}
+                            </PaymentMethodLabel>
+                        </PaymentMethodDiv>
+                    )) }
+                <PaymentMethodAddButton onClick={()=>setShowAddressForm(true)}>
+                    <i className="fi fi-rs-plus"></i>
+                    <p>Agregar dirección</p>
+                </PaymentMethodAddButton>
+                </PaymentMethodForm>
+
+                {/* Método de pago */}
+
                 <PaymentMethodTitle>Asignar Método de pago</PaymentMethodTitle>
                 <PaymentMethodForm>
                     {cards && cards.map((card)=>(
@@ -81,6 +125,11 @@ const PaymentMethod = () =>{
                 </UserHeaderLogo>
             </UserHeader>
             {MethodView()}
+            <AddressForm
+                visible={showAddressForm}
+                onClose={()=>setShowAddressForm(false)}
+                onAlert={()=>setShowAlert(true)}
+            />
             <CreditForm 
                 visible={showForm}
                 onClose={()=>setShowForm(false)}
@@ -94,8 +143,14 @@ const PaymentMethod = () =>{
                 visible={showAlertError}/>
             <Alert
                 id="alert_product"
-                title={"Tarjeta no seleccionada"} 
-                message={"Debes seleccionar una tarjeta."}
+                title={
+                    !selectedCard ? "Tarjeta no seleccionada" : 
+                    !selectedAddress ? "Dirección no seleccionada" : ""
+                } 
+                message={
+                    !selectedCard ? "Debes seleccionar una tarjeta.":
+                    !selectedAddress ? "Debes seleccionar una dirección." : ""
+                }
                 action={() => setShowAlert(false)}
                 visible={showAlert}/>
         </Fragment>

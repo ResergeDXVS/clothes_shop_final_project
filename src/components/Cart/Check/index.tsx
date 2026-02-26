@@ -1,15 +1,18 @@
 import React, { Fragment } from "react";
-import { CheckContainer, CheckDecoration, CheckErrorContainer, CheckItems, CheckPayment, CheckProduct, CheckProductDiscount, CheckProductName, CheckProductNumber, CheckProductOriginalPrice, CheckProductTotal, CheckSubTitle, CheckTitle } from "./styles";
+import { CheckAddress, CheckContainer, CheckDecoration, CheckErrorContainer, CheckItems, CheckPayment, CheckProduct, CheckProductDiscount, CheckProductName, CheckProductNumber, CheckProductOriginalPrice, CheckProductTotal, CheckSubTitle, CheckTitle } from "./styles";
 import { useAppDispatch, useAppSelector } from "../../../redux/store/store";
 import { UserHeader, UserHeaderLogo } from "../../Header/HeaderMin/styles";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../../../redux/slices/cartSlice";
+import Product from "../../Body/Products";
 
 
 const Check = () => {
     const actualUser = useAppSelector(state=>state.user.actualUser);
     const carts = useAppSelector(state=>state.cart.carts);
-    const actualCart = carts.find(cart=>cart.user_id === actualUser?.id && cart.product_ids.length>0 && cart.payment_id!==null ) 
+    const address = useAppSelector(state=>state.addresses.address);
+    const actualCart = carts.find(cart=>cart.user_id === actualUser?.id && cart.product_ids.length>0 && cart.payment_id!==null );
+    const addressSelected = address.find(add=> add.id === actualCart?.address_id);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const clearAndReturn = () => {
@@ -51,6 +54,11 @@ const Check = () => {
                         )
                     }
                 </CheckItems>
+                <CheckAddress>Envio de los productos a "
+                    {` Calle ${addressSelected?.address}, Número exterior ${addressSelected?.external_number}, `}
+                    { addressSelected?.internal_number !== "" && `Numero interior ${addressSelected?.internal_number}, `}
+                    {`C.P. ${addressSelected?.postal}, Colonia ${addressSelected?.suburb}, ${addressSelected?.contry}`} "
+                </CheckAddress>
                 <CheckTitle>Total Pagado ${actualCart?.total}</CheckTitle>
                 <CheckPayment>
                     <button onClick={()=>clearAndReturn()}>

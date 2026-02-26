@@ -36,8 +36,8 @@ const Cart = () => {
         }))
     }
 
-    const goPaymentMethod = (id:number) => {
-        navigate(`/payment/${id}`);
+    const goPaymentMethod = () => {
+        navigate(`/payment/`);
     }
 
     const cartView = () => (
@@ -87,7 +87,7 @@ const Cart = () => {
                 }
                 <CartPayment>
                     <button
-                        onClick={()=>goPaymentMethod(userCart?.user_id || 0)}>
+                        onClick={()=>goPaymentMethod()}>
                         Pagar ${userCart?.total}
                     </button>
                 </CartPayment>

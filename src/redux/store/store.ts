@@ -5,6 +5,7 @@ import productsReducer from "../slices/productSlice";
 import dataReducer from "../slices/dataSlice";
 import cartReducer from "../slices/cartSlice";
 import paymentReducer from "../slices/paymentMethodSlice";
+import addressReducer from "../slices/addresssSlice";
 
 
 
@@ -16,6 +17,7 @@ export const store = configureStore({
         product:productsReducer,
         data:dataReducer,
         payments:paymentReducer,
+        addresses:addressReducer,
     }
 });
 
