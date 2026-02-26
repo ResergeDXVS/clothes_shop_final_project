@@ -7,8 +7,6 @@ import { useAppSelector } from "../../../redux/store/store";
 import { ProductTitles } from "./styles";
 import { Products } from "../../../redux/slices/productSlice";
 import ProductList from "../Products/ProductList";
-import HeaderLogin from "../../Header/HeaderLogin";
-import { useNavigate } from "react-router-dom";
 
 const Main = () => {
     const products = useAppSelector(state=>state.product.products);

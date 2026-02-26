@@ -27,14 +27,17 @@ const Header = () => {
             </HeaderOptions>
             <HeaderIcons>
                 <div id="icon-user" 
+                    role="icon_user"
                     onClick={() => setShowLogin(prev => !prev)}>
                     {
                         username===null ? 
                         <i className="fi fi-rs-user"></i> :
-                        <h1>{username?.name.charAt(0)}</h1>
+                        <h1 role="user_login">{username?.name.charAt(0)}</h1>
                     }
                     
-                    <UserContainer className={showLogin ? "user--show" : ""}>
+                    <UserContainer
+                        role="user_container"
+                        className={showLogin ? "user--show" : ""}>
                         <HeaderLogin />
                     </UserContainer>
                 </div>
@@ -42,7 +45,9 @@ const Header = () => {
 
                 {
                     username!== null && (
-                        <div className="icon-bag" 
+                        <div
+                            role="bag" 
+                            className="icon-bag" 
                             onClick={()=>navigate(`/cart/${username?.id}`)}>
                             <i className="fi fi-rs-shopping-bag"></i>
                         </div>

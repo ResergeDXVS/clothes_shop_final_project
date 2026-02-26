@@ -63,7 +63,7 @@ const ProductDetail = () => {
                     <h3>Descripción: </h3>
                     <p>{product?.description}</p>
                 </ProductDetailDescription>
-                <ProductDetailButton onClick={()=>product && addProduct(product)}>Guardar al carrito</ProductDetailButton>
+                <ProductDetailButton role="buttonCart" onClick={()=>product && addProduct(product)}>Guardar al carrito</ProductDetailButton>
             </ProductDetailContainer>
             <Alert
                 id="alert_product"

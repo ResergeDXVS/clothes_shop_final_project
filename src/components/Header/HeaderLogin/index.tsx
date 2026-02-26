@@ -10,9 +10,7 @@ const HeaderLogin = () => {
     const dispatch = useDispatch();
     const actualUser = useAppSelector(state=>state.user.actualUser);
     const closeSessionAction = () => {
-        if (actualUser){
-            dispatch(closeUser());
-        }
+        dispatch(closeUser());
     }
 
 
