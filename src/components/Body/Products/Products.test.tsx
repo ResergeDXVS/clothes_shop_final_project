@@ -43,7 +43,7 @@ describe("Product component",()=>{
         renderWithProviders(productAux);
         const price = screen.getByText("$1432.94");
         expect(price).toBeInTheDocument();
-        const total = screen.queryByRole("total_price")?.textContent;
+        const total = screen.queryByTestId("total_price")?.textContent;
         expect(total).toBe("$1289.65");
     });
 

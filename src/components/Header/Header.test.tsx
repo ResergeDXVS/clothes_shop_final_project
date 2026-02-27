@@ -82,7 +82,7 @@ describe("Header Component",()=>{
             }
         }));
         renderWithProviders();
-        const bag = screen.queryByRole('bag');
+        const bag = screen.queryByTestId('bag');
         expect(bag).toBeInTheDocument();
     });
 
@@ -96,7 +96,7 @@ describe("Header Component",()=>{
             })
         );
         renderWithProviders();
-        const user = screen.queryByRole("user_login");
+        const user = screen.queryByTestId("user_login");
         expect(user).toBeNull();
     });
     it("should show that a user is logged",()=>{
@@ -116,7 +116,7 @@ describe("Header Component",()=>{
             }
         }));
         renderWithProviders();
-        const user = screen.queryByRole("user_login");
+        const user = screen.queryByTestId("user_login");
         expect(user).toBeInTheDocument();
     });
 

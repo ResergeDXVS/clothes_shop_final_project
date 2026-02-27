@@ -78,7 +78,9 @@ const PaymentMethod = () =>{
                             </PaymentMethodLabel>
                         </PaymentMethodDiv>
                     )) }
-                <PaymentMethodAddButton onClick={()=>setShowAddressForm(true)}>
+                <PaymentMethodAddButton 
+                    data-testid="add_address_button"
+                    onClick={()=>setShowAddressForm(true)}>
                     <i className="fi fi-rs-plus"></i>
                     <p>Agregar dirección</p>
                 </PaymentMethodAddButton>
@@ -102,13 +104,17 @@ const PaymentMethod = () =>{
                             </PaymentMethodLabel>
                         </PaymentMethodDiv>
                     ))}
-                    <PaymentMethodAddButton onClick={()=>setShowForm(true)}>
+                    <PaymentMethodAddButton 
+                        data-testid="add_method_button"
+                        onClick={()=>setShowForm(true)}>
                         <i className="fi fi-rs-plus"></i>
                         <p>Agregar método de pago</p>
                     </PaymentMethodAddButton>
                 </PaymentMethodForm>
                 <PaymentMethodPayment>
-                    <button type="button" onClick={handlePay}>
+                    <button
+                        data-testid="go_button" 
+                        type="button" onClick={handlePay}>
                         Pagar
                     </button>
                 </PaymentMethodPayment>

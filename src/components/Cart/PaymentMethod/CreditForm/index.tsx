@@ -81,8 +81,11 @@ const CreditForm = ({ visible,onClose,onAlert }: PaymentMethodProps) => {
 
     return (
         <Fragment>
-            <MethodFormBase className={ visible ? `form--show`:``}>
+            <MethodFormBase 
+                data-testid="form_credit"
+                className={ visible ? `form--show`:``}>
                 <MethodCancel
+                    data-testid="form_credit_cancel"
                     onClick={()=>clearAndClose()}>
                     <i className="fi fi-rs-x"></i>
                 </MethodCancel>
@@ -92,7 +95,7 @@ const CreditForm = ({ visible,onClose,onAlert }: PaymentMethodProps) => {
                     <MethodDiv 
                         $grid_name="number"
                         $show_data={checkData("number",form.card_number)}>
-                        <label>Número de tarjeta</label>
+                        <label htmlFor="card_number">Número de tarjeta</label>
                         <input
                             id="card_number"
                             name="card_number"
@@ -107,7 +110,7 @@ const CreditForm = ({ visible,onClose,onAlert }: PaymentMethodProps) => {
                     <MethodDiv 
                         $grid_name="expired"
                         $show_data={checkData("expired",form.expiration)}>
-                        <label>Expiración</label>
+                        <label htmlFor="expiration">Expiración</label>
                         <input
                             id="expiration"
                             name="expiration"
@@ -122,7 +125,7 @@ const CreditForm = ({ visible,onClose,onAlert }: PaymentMethodProps) => {
                     <MethodDiv 
                         $grid_name="cvc"
                         $show_data={checkData("cvc",form.cvc)}>
-                        <label>CVC</label>
+                        <label htmlFor="cvc">CVC</label>
                         <input
                             id="cvc"
                             name="cvc"
@@ -134,7 +137,9 @@ const CreditForm = ({ visible,onClose,onAlert }: PaymentMethodProps) => {
                         <p>Favor de agregar 3 dígitos</p>
                     </MethodDiv>
 
-                    <MethodAddButton type="submit">
+                    <MethodAddButton 
+                        data-testid="form_credit_submit"
+                        type="submit">
                         <i className="fi fi-rs-plus"></i>
                         <p>Agregar</p>
                     </MethodAddButton>

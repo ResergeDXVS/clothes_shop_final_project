@@ -72,8 +72,11 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
 
     return (
         <Fragment>
-            <AddressFormBase className={ visible ? `form--show`:``}>
+            <AddressFormBase 
+                data-testid="form_address"
+                className={ visible ? `form--show`:``}>
                 <AddressCancel
+                    data-testid="form_address_cancel"
                     onClick={()=>clearAndClose()}>
                     <i className="fi fi-rs-x"></i>
                 </AddressCancel>
@@ -81,7 +84,7 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                     <AddressDiv
                         $grid_name="direccion"
                         $show_data={checkData("direccion",form.address)}>
-                        <label>Calle</label>
+                        <label htmlFor="address">Calle</label>
                         <input
                             id="address"
                             name="address"
@@ -94,7 +97,7 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                     <AddressDiv
                         $grid_name="externo"
                         $show_data={checkData("externo",form.external_number)}>
-                        <label>Número exterior</label>
+                        <label htmlFor="external_number">Número exterior</label>
                         <input
                             id="external_number"
                             name="external_number"
@@ -107,7 +110,7 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                     <AddressDiv
                         $grid_name="interno"
                         $show_data={null}>
-                        <label>Número Interno</label>
+                        <label htmlFor="internal_number">Número Interno</label>
                         <input
                             id="internal_number"
                             name="internal_number"
@@ -120,7 +123,7 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                     <AddressDiv
                         $grid_name="postal"
                         $show_data={checkData("postal",form.postal)}>
-                        <label>Código Postal</label>
+                        <label htmlFor="postal">Código Postal</label>
                         <input
                             id="postal"
                             name="postal"
@@ -134,7 +137,7 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                     <AddressDiv
                         $grid_name="colonia"
                         $show_data={checkData("colonia",form.suburb)}>
-                        <label>Colonia</label>
+                        <label htmlFor="suburb">Colonia</label>
                         <input
                             id="suburb"
                             name="suburb"
@@ -147,7 +150,7 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                     <AddressDiv
                         $grid_name="pais"
                         $show_data={checkData("pais",form.contry)}>
-                        <label>Pais</label>
+                        <label htmlFor="contry">Pais</label>
                         <input
                             id="contry"
                             name="contry"
@@ -158,7 +161,9 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                         <p>Favor de agregar el país</p>
                     </AddressDiv>
 
-                    <AddressAddButton type="submit">
+                    <AddressAddButton 
+                        data-testid="form_address_submit"
+                        type="submit">
                         <i className="fi fi-rs-plus"></i>
                         <p>Agregar</p>
                     </AddressAddButton>
