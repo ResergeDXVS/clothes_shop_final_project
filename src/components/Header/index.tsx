@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { HeaderBase, HeaderIcons, HeaderLogo, HeaderOptions } from "./styles";
-import HeaderSearch from "./HeaderSearch";
 import HeaderLogin from "./HeaderLogin";
 import { UserContainer } from "./HeaderLogin/styles";
 import { useAppSelector } from "../../redux/store/store";
@@ -27,16 +26,16 @@ const Header = () => {
             </HeaderOptions>
             <HeaderIcons>
                 <div id="icon-user" 
-                    role="icon_user"
+                    data-testid="icon_user"
                     onClick={() => setShowLogin(prev => !prev)}>
                     {
                         username===null ? 
                         <i className="fi fi-rs-user"></i> :
-                        <h1 role="user_login">{username?.name.charAt(0)}</h1>
+                        <h1 data-testid="user_login">{username?.name.charAt(0)}</h1>
                     }
                     
                     <UserContainer
-                        role="user_container"
+                        data-testid="user_container"
                         className={showLogin ? "user--show" : ""}>
                         <HeaderLogin />
                     </UserContainer>
@@ -46,7 +45,7 @@ const Header = () => {
                 {
                     username!== null && (
                         <div
-                            role="bag" 
+                            data-testid="bag" 
                             className="icon-bag" 
                             onClick={()=>navigate(`/cart/${username?.id}`)}>
                             <i className="fi fi-rs-shopping-bag"></i>
@@ -55,7 +54,6 @@ const Header = () => {
                 }
                 
             </HeaderIcons>
-            <HeaderSearch/>
         </HeaderBase>
 
     );

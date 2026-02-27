@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import Carousel from "../Carousel";
@@ -24,7 +24,6 @@ const Main = () => {
         for(let aux of auxList){
             productList.push(products[aux]);
         }
-        console.log(auxList);
         return productList;
     }
 

@@ -8,11 +8,9 @@ const Cart = () => {
     const param = useParams<{id:string}>();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    console.log(param);
     const carts = useAppSelector(state => state.cart.carts);
     const actualUser = useAppSelector(state=>state.user.actualUser);
     const userCart = carts.find(cart => cart.user_id === Number(param.id));
-    console.log(userCart);
 
     const updateItem = (idItem:number,count:number) =>{
         if(count === 0){
@@ -59,14 +57,17 @@ const Cart = () => {
                                     <CartProductOriginalPrice>
                                         ${product.price}
                                     </CartProductOriginalPrice>
-                                    <CartProductDiscount>
+                                    <CartProductDiscount
+                                        data-testid="product_promotion">
                                         {
                                             product.promotion >0 ?
                                             product.promotion+'%' :
                                             ""
                                         }
                                     </CartProductDiscount>
-                                    <CartProductNumber type="number"
+                                    <CartProductNumber 
+                                        data-testid="product_count"
+                                        type="number"
                                         id={"cantidad_"+product.id}
                                         name={"cantidad_"+product.id}
                                         min="0"
@@ -74,10 +75,11 @@ const Cart = () => {
                                         value={count}
                                         onChange={(e)=>updateItem(product.id,Number(e.target.value))}
                                     />
-                                    <CartProductTotal>
+                                    <CartProductTotal data-testid="product_total_price">
                                         ${(count*(product.price * (1-(product.promotion/100)))).toFixed(2)}
                                     </CartProductTotal>
                                     <CartDeleteButton
+                                        data-testid="product_delete"
                                         className="fi fi-rs-trash cart__button"
                                         onClick={()=>deleteItem(product.id)}/>
                                 </CartProduct>
@@ -87,6 +89,7 @@ const Cart = () => {
                 }
                 <CartPayment>
                     <button
+                        data-testid="go_to_pay_button"
                         onClick={()=>goPaymentMethod()}>
                         Pagar ${userCart?.total}
                     </button>

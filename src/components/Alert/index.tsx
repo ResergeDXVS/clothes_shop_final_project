@@ -23,7 +23,7 @@ const Alert = ({id,title,message,action,visible}:AlertProps) => {
                 {message}
             </AlertMessage>
             <AlertButton
-                role="alert_button"
+                data-testid="alert_button"
                 onClick={action}>
                 Entendido
             </AlertButton>

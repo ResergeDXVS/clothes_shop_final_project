@@ -5,7 +5,7 @@ import { loginUserThunk } from "../../../redux/slices/userSlice";
 import { UserHeader, UserHeaderLogo } from "../../Header/HeaderMin/styles";
 import { useNavigate } from "react-router-dom";
 import Alert from "../../Alert";
-import { useAppDispatch, useAppSelector } from "../../../redux/store/store";
+import { useAppDispatch } from "../../../redux/store/store";
 
 export type LoginState = {
     email: string,
@@ -17,8 +17,6 @@ const UserLogin = () => {
     const navigate = useNavigate();
     const [submitted, setSubmitted] = useState<boolean|null>(null);
     const dispatch = useAppDispatch();
-    const actualUser = useAppSelector(state => state.user.users);
-    console.log(actualUser);
     const [form, setForm] = useState<LoginState>({
         email:"",
         password:"",
@@ -37,10 +35,8 @@ const UserLogin = () => {
         }
         const result = await dispatch(loginUserThunk(form));
         if (loginUserThunk.fulfilled.match(result)) {
-            console.log("Usuario creado:", result.payload);
             navigate("/");
         }else{
-            console.log("gfdafafs")
             setShowAlert(true);
         }
     };

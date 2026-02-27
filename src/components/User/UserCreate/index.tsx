@@ -12,7 +12,7 @@ import {
 import { createUserThunk } from "../../../redux/slices/userSlice";
 import { UserHeader, UserHeaderLogo } from "../../Header/HeaderMin/styles";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../redux/store/store";
+import { useAppDispatch } from "../../../redux/store/store";
 import Alert from "../../Alert";
 
 export type FormState = {
@@ -30,7 +30,6 @@ const UserCreate = () => {
     const [submitted, setSubmitted] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const dispatch = useAppDispatch();
-    const actualUser = useAppSelector((state) => state.user.actualUser);
 
     const [form, setForm] = useState<FormState>({
             name: "",
@@ -55,20 +54,17 @@ const UserCreate = () => {
 
             const result = await dispatch(createUserThunk(form));
             if (createUserThunk.fulfilled.match(result)) {
-            console.log("Usuario creado:", result.payload);
+                setForm({
+                    name: "",
+                    paternal_surname: "",
+                    maternal_surname: "",
+                    rfc: "",
+                    datebirth: "",
+                    email: "",
+                    password: "",
+                });
 
-            // Limpia el formulario
-            setForm({
-                name: "",
-                paternal_surname: "",
-                maternal_surname: "",
-                rfc: "",
-                datebirth: "",
-                email: "",
-                password: "",
-            });
-
-            navigate("/");
+                navigate("/");
             } else {
                 setShowAlert(true);
             }

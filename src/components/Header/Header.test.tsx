@@ -140,7 +140,7 @@ describe("Header Component",()=>{
         const mockNavigate = jest.fn();
         mockedUseNavigate.mockReturnValue(mockNavigate);
         renderWithProviders();
-        const user = screen.getByRole("bag");
+        const user = screen.getByTestId("bag");
         fireEvent.click(user);
 
         expect(mockNavigate).toHaveBeenCalledWith("/cart/1");
@@ -165,10 +165,10 @@ describe("Header Component",()=>{
         const mockNavigate = jest.fn();
         mockedUseNavigate.mockReturnValue(mockNavigate);
         renderWithProviders();
-        const user = screen.getByRole("icon_user");
+        const user = screen.getByTestId("icon_user");
         fireEvent.click(user);
 
-        const userContainer = screen.getByRole("user_container");
+        const userContainer = screen.getByTestId("user_container");
         expect(userContainer).toHaveClass("user--show");
     });
 

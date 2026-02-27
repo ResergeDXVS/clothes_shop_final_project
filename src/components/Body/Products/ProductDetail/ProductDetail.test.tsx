@@ -125,7 +125,7 @@ describe("ProductDetail Component",()=>{
             }
         }));
         renderWithProviders("/product/5");
-        const button = screen.getByRole("buttonCart");
+        const button = screen.getByTestId("buttonCart");
         fireEvent.click(button);
         expect(mockDispatch).toHaveBeenCalledTimes(1);
 
@@ -160,11 +160,11 @@ describe("ProductDetail Component",()=>{
             }
         }));
         renderWithProviders("/product/5");
-        const button = screen.getByRole("buttonCart");
+        const button = screen.getByTestId("buttonCart");
         fireEvent.click(button);
         const alert = screen.getByText("Acceder a cuenta");
         expect(alert).toBeInTheDocument();
-        const alertbutton = screen.getByRole("alert_button");
+        const alertbutton = screen.getByTestId("alert_button");
         fireEvent.click(alertbutton);
         const message = screen.queryByText(
             "Se necesita ingresar a la cuenta o crear una para agregar productos al carrito."
@@ -202,7 +202,7 @@ describe("ProductDetail Component",()=>{
             }
         }));
         renderWithProviders("/product/");
-        const error = screen.getByText("rror en la búsqueda");
+        const error = screen.getByText("Error en la búsqueda");
         expect(error).toBeInTheDocument();
     });
 

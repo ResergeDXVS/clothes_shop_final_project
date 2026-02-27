@@ -20,9 +20,7 @@ const Product = ({product}:ProductProps) =>{
         if(user){
             dispatch(addCart({user,product}));
         }else{
-            console.log("dadsada");
-            const alert = document.getElementById("alert_product")
-            alert?.classList.toggle("alert--show");
+            setShowAlert(true);
         }   
     };
 
@@ -32,7 +30,9 @@ const Product = ({product}:ProductProps) =>{
     return (
         <Fragment>
             <ProductData>
-                <ProductContainer key={product.id}
+                <ProductContainer 
+                    data-testid="product_container"
+                    key={product.id}
                     $hasDiscount={!!product.promotion}
                     onClick={()=>checkDetails(product.id)}>
                     <ProductImagen>
@@ -54,6 +54,7 @@ const Product = ({product}:ProductProps) =>{
                         )
                     }
                     <ProductPrice 
+                        data-testid="total_price"
                         $isTotal={true}>
                             ${((product.price * (1-(product.promotion/100)))).toFixed(2)}
                         
