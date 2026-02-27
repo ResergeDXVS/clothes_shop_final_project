@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { CheckAddress, CheckContainer, CheckDecoration, CheckErrorContainer, CheckItems, CheckPayment, CheckProduct, CheckProductDiscount, CheckProductName, CheckProductNumber, CheckProductOriginalPrice, CheckProductTotal, CheckSubTitle, CheckTitle } from "./styles";
+import { CheckAddress, CheckContainer, CheckDecoration, CheckErrorContainer, CheckItems, CheckMethod, CheckPayment, CheckProduct, CheckProductDiscount, CheckProductName, CheckProductNumber, CheckProductOriginalPrice, CheckProductTotal, CheckSubTitle, CheckTitle } from "./styles";
 import { useAppDispatch, useAppSelector } from "../../../redux/store/store";
 import { UserHeader, UserHeaderLogo } from "../../Header/HeaderMin/styles";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,10 @@ const Check = () => {
     const actualUser = useAppSelector(state=>state.user.actualUser);
     const carts = useAppSelector(state=>state.cart.carts);
     const address = useAppSelector(state=>state.addresses.address);
+    const payments = useAppSelector(state=>state.payments.payment);
     const actualCart = carts.find(cart=>cart.user_id === actualUser?.id && cart.product_ids.length>0 && cart.payment_id!==null );
     const addressSelected = address.find(add=> add.id === actualCart?.address_id);
+    const methodSelected = payments.find(method=>method.id === actualCart?.payment_id);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const clearAndReturn = () => {
@@ -59,9 +61,15 @@ const Check = () => {
                     { addressSelected?.internal_number !== "" && `Numero interior ${addressSelected?.internal_number}, `}
                     {`C.P. ${addressSelected?.postal}, Colonia ${addressSelected?.suburb}, ${addressSelected?.contry}`} "
                 </CheckAddress>
+                <CheckMethod>
+                    
+                    {`Método de pago ${methodSelected?.card_number.slice(-4).padStart(methodSelected?.card_number.length, "*")}`}
+                </CheckMethod>
                 <CheckTitle>Total Pagado ${actualCart?.total}</CheckTitle>
                 <CheckPayment>
-                    <button onClick={()=>clearAndReturn()}>
+                    <button
+                        data-testid="button_return" 
+                        onClick={()=>clearAndReturn()}>
                         Regresar a la página
                     </button>
                     

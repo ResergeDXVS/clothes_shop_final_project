@@ -91,6 +91,20 @@ const CheckAddress = styled.h3`
     margin: 0;
 `;
 
+const CheckMethod = styled.h3`
+    font-size: ${PxToRem(20)};
+    font-weight: 400;
+    font-family: ${props=>props.theme.fonts.secondary};
+    color:${props=>props.theme.colors.background};
+    width: 100%;
+    padding-top:1.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px dotted ${props=>props.theme.colors.background};
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+`;
+
 const CheckItems = styled.section`
     ${FlexboxStructure("column","center","center")};
     gap:0.5rem;
@@ -201,5 +215,6 @@ export {
     CheckProductNumber,
     CheckProductTotal,
     CheckPayment,
-    CheckAddress
+    CheckAddress,
+    CheckMethod
 }
