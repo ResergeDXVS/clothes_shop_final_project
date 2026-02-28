@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { FlexboxStructure, PxToRem } from "../../../../theme/styles";
+import styled, { css } from "styled-components";
+import { FlexboxStructure, mediaAdjustments, phoneAdjustments, PxToRem } from "../../../../theme/styles";
 
 const AddressFormBase = styled.div`
     ${FlexboxStructure("column","center","center")};
@@ -21,19 +21,35 @@ const AddressFormBase = styled.div`
         opacity: 1;
         bottom:25%;
     }
+    ${mediaAdjustments(css`
+        padding: 1.5rem;
+        width: 675px;
+        height: 450px;
+    `)};
+    ${phoneAdjustments(css`
+        padding: 1rem;
+        width: 550px;
+        height: 450px;
+    `)};
 `;
 
 const AdressStructureForm = styled.form`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3,auto);
     grid-template-areas: 
         "direccion direccion direccion"
         "externo interno  postal"
         "colonia pais button"
     ;
-
     padding: 2rem;
     border: 2px dashed ${p=>p.theme.colors.buttons};
+    ${mediaAdjustments(css`
+        padding: 1rem;
+    `)};
+    ${phoneAdjustments(css`
+        padding: 1rem;
+    `)};
 `;
 
 const AddressDiv = styled.div<{$grid_name:string,$show_data:boolean | null}>`
@@ -51,6 +67,14 @@ const AddressDiv = styled.div<{$grid_name:string,$show_data:boolean | null}>`
     margin: 1.5rem;
     color: ${p=>p.theme.colors.background};
     font-size: ${PxToRem(20)};
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(16)};
+        margin: 1rem;
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(12)};
+        margin: .75rem;
+    `)};
     label{
         width: 100%;
         font-family: ${p=>p.theme.fonts.primary};
@@ -88,15 +112,29 @@ const AddressAddButton = styled.button`
     width: auto;
     height: 50%;
     gap: .75rem;
+    font-size: ${PxToRem(20)};  
+    transition: ${p=>p.theme.buttons.transition};
+    cursor: pointer;
+    &:hover{
+        transform: ${p=>p.theme.buttons.scale};
+        filter: ${p=>p.theme.buttons.bright};
+    }
+    
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(16)};
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(12)};
+    `)};
     i{
-        font-size: ${PxToRem(20)};    
+        font-size:inherit;
         display: flex;
         justify-content: center;
         text-align: center;
         line-height: 1;
     }
     p{
-        font-size: ${PxToRem(20)};    
+        font-size:inherit;  
         text-align: center;
         line-height: 1;
         margin: 0;
@@ -108,6 +146,12 @@ const AddressCancel = styled.div`
     ${FlexboxStructure("column","center","center")};
     color: ${p=>p.theme.colors.buttons};
     background-color: none;
+    transition: ${p=>p.theme.buttons.transition};
+    cursor: pointer;
+    &:hover{
+        transform: ${p=>p.theme.buttons.scale};
+        filter: ${p=>p.theme.buttons.bright};
+    }
     i{
         color: ${p=>p.theme.colors.buttons};
         font-size: ${PxToRem(28)};    
@@ -117,6 +161,12 @@ const AddressCancel = styled.div`
         line-height: 1;
         margin: 0;
         font-weight: 700;
+        ${mediaAdjustments(css`
+            font-size: ${PxToRem(24)};
+        `)};
+        ${phoneAdjustments(css`
+            font-size: ${PxToRem(20)};
+        `)};
     }
 `;
 

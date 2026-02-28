@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { FlexboxStructure, PxToRem } from "../../theme/styles";
+import styled, { css } from "styled-components";
+import { FlexboxStructure, mediaAdjustments, phoneAdjustments, PxToRem } from "../../theme/styles";
 
 const CartContainer = styled.section`
     width: auto;
@@ -44,11 +44,17 @@ const CartTitle = styled.h1`
     border-bottom: 1px solid ${props=>props.theme.colors.white};
     text-transform: uppercase;
     text-align: center;
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(36)};
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(32)};
+    `)};
 `;
 
 const CartItems = styled.section`
     ${FlexboxStructure("row","center","center")};
-    gap:0.5rem;
+    gap:2rem;
     margin: 1rem 3rem;
     padding: 0.5rem;
 
@@ -66,20 +72,40 @@ const CartProduct = styled.section`
     grid-template-areas: 
     "imagen title title title total delete"
     "imagen price discount number total delete";
-    gap:.5rem;
+    gap:.75rem;
     width: 100%;
     padding: .75rem;
     height: 200px;
+    ${mediaAdjustments(css`
+        grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr;
+        grid-template-rows: repeat(3,1fr);
+        grid-template-areas: 
+        "imagen title title total delete"
+        "imagen price discount total delete"
+        "imagen number number total delete";
+    `)};
+    ${phoneAdjustments(css`
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: repeat(4,1fr);
+        grid-template-areas: 
+        "imagen title title delete"
+        "imagen price discount delete"
+        "imagen number number delete"
+        "imagen total total delete";
+    `)};
 `;
 
 const CartProductImage = styled.img`
     grid-area: imagen;
-    border-radius: .5rem;
     width: 150px;
     height: 150px;
     object-fit: cover;
     border-radius: 0.375rem;
     margin: auto;
+    ${phoneAdjustments(css`
+        width:100px;
+        height:100px;
+    `)};
 `;
 
 const CartProductName = styled.p`
@@ -93,7 +119,16 @@ const CartProductName = styled.p`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: ${PxToRem(24)};
+    font-size: ${PxToRem(28)};
+    margin-left:.75rem;
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(24)};
+        margin-left:.25rem;
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(20)};
+        margin-left:.25rem;
+    `)};
 `;
 
 const CartProductOriginalPrice = styled.p`
@@ -104,6 +139,15 @@ const CartProductOriginalPrice = styled.p`
     margin:0;
     text-align: center;
     font-size: ${PxToRem(20)};
+    margin-left:.75rem;
+    ${mediaAdjustments(css`
+        text-align: left;
+        font-size: ${PxToRem(16)};
+    `)};
+    ${phoneAdjustments(css`
+        text-align: left;
+        font-size: ${PxToRem(16)};
+    `)};
 `;
 
 const CartProductDiscount = styled.p`
@@ -114,36 +158,66 @@ const CartProductDiscount = styled.p`
     margin:0;
     text-align: start;
     font-size: ${PxToRem(20)};
+    ${mediaAdjustments(css`
+        text-align: right;
+        font-size: ${PxToRem(16)};
+    `)};
+    ${phoneAdjustments(css`
+        text-align: right;
+        font-size: ${PxToRem(16)};
+    `)};
 `;
 
 const CartProductNumber = styled.input`
     grid-area: number;
     font-family: ${props=>props.theme.fonts.secondary};
     color: ${props=> props.theme.colors.details};
-    margin: 0;
     text-align: center;
-    flex-grow: 1;
-    width: auto;
+    width: 100%;
     margin: 0px 8px;
+    padding: 0.5rem;
     background-color: ${props=> props.theme.colors.gray};
-    border: 1px solid ${props=> props.theme.colors.background};
+    border: 1px solid ${props=> props.theme.colors.white};
+    border-radius: .5rem;
     font-size: ${PxToRem(20)};
+    ${mediaAdjustments(css`
+        width: auto;
+        margin: 0px 8px;
+        padding: 0.5rem;
+        align-self: center;
+        font-size: ${PxToRem(16)};
+    `)};
+    ${phoneAdjustments(css`
+        width:auto;
+        margin: 0px 4px;
+        padding: 0.25rem;
+        align-self: center;
+        font-size: ${PxToRem(16)};
+    `)};
 `;
 
 const CartProductTotal = styled.p`
     grid-area: total;
     font-family: ${props=>props.theme.fonts.secondary};
-    color:${props=> props.theme.colors.background};
+    color:${props=> props.theme.colors.white};
     margin:0;
     text-align: right;
     font-weight: 700;
-    font-size: ${PxToRem(20)};
+    font-size: ${PxToRem(28)};
+    ${mediaAdjustments(css`
+        text-align: right;
+        font-size: ${PxToRem(24)};
+    `)};
+    ${phoneAdjustments(css`
+        text-align: center;
+        font-size: ${PxToRem(20)};
+    `)};
 `;
 
 const CartDeleteButton = styled.i`
     grid-area:delete;
     cursor: pointer;
-    color: ${props=> props.theme.colors.background};
+    color: ${props=> props.theme.colors.white};
     font-size: ${PxToRem(32)};
     line-height: 1;
     text-align: center;
@@ -166,6 +240,15 @@ const CartPayment = styled.div`
         padding: .75rem;
         border-radius: .75rem;
         font-weight: 700;
+        ${mediaAdjustments(css`
+            font-size: ${PxToRem(28)};
+            padding: .5rem;
+        `)};
+        ${phoneAdjustments(css`
+            font-size: ${PxToRem(24)};
+            padding: .5rem;
+        `)};
+        
     }
 `;
 

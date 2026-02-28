@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { FlexboxStructure, PxToRem } from "../../../theme/styles";
+import styled, { css } from "styled-components";
+import { FlexboxStructure, mediaAdjustments, phoneAdjustments, PxToRem } from "../../../theme/styles";
 
 const PaymentMethodDecoration = styled.section`
     ${FlexboxStructure("column","center","center")};
@@ -9,6 +9,12 @@ const PaymentMethodDecoration = styled.section`
     border: 2px solid ${p=>p.theme.colors.background};
     background-color: ${p=>p.theme.colors.white};
     padding: 6rem;
+    ${mediaAdjustments(css`
+        padding: 4rem;
+    `)};
+    ${phoneAdjustments(css`
+        padding: 2rem;
+    `)};
 `;
 
 const PaymentMethodTitle = styled.h1`
@@ -21,6 +27,14 @@ const PaymentMethodTitle = styled.h1`
     border-bottom: 1px solid ${props=>props.theme.colors.gray};
     text-transform: uppercase;
     text-align: center;
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(36)};
+        margin: 1rem 1.5rem;
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(32)};
+        margin: 1rem 1.5rem;
+    `)};
 `;
 
 const PaymentMethodForm = styled.form`
@@ -33,21 +47,29 @@ const PaymentMethodDiv = styled.div`
     ${FlexboxStructure("row","center","center")};
     padding: .75rem 3rem;
     gap:2rem;
-
+    font-size: ${PxToRem(28)};
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(24)};
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(20)};
+    `)};
 `;
 
 const PaymentMethodInput = styled.input`
     width: auto;
-    font-size: ${PxToRem(26)};
+    font-size: inherit;
     margin: 0;
+    cursor: pointer;
 `;
 
 const PaymentMethodLabel = styled.label`
     width: auto;
     margin: 0;
     line-height: 1;
-    font-size: ${PxToRem(26)};
+    font-size: inherit;
     padding: 1rem;
+    
     
 `;
 
@@ -58,20 +80,26 @@ const PaymentMethodAddButton = styled.div`
     border:1px solid ${p=>p.theme.colors.gray};
     padding: .75rem;
     width: 100%;
-    font-size: ${PxToRem(26)};
+    font-size: ${PxToRem(28)};
     gap: 0.75rem;
     &:hover{
         cursor: pointer;
     }
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(24)};
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(20)};
+    `)};
     i{
-        font-size: ${PxToRem(26)};    
+        font-size: inherit;  
         display: flex;
         justify-content: center;
         text-align: center;
         line-height: 1;
     }
     p{
-        font-size: ${PxToRem(26)};    
+        font-size: inherit;     
         text-align: center;
         line-height: 1;
         margin: 0;
@@ -93,6 +121,12 @@ const PaymentMethodPayment = styled.div`
         padding: .75rem;
         border-radius: .75rem;
         font-weight: 700;
+        ${mediaAdjustments(css`
+            font-size: ${PxToRem(28)};
+        `)};
+        ${phoneAdjustments(css`
+            font-size: ${PxToRem(24)};
+        `)};
     }
 `;
 
