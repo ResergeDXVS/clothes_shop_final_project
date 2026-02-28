@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { FlexboxStructure, PxToRem } from "../../../theme/styles";
+import styled, { css } from "styled-components";
+import { FlexboxStructure, mediaAdjustments, phoneAdjustments, PxToRem } from "../../../theme/styles";
 
 const CheckContainer = styled.section`
     width: auto;
-    height:90vh;
+
     ${FlexboxStructure("column","center","center")};
     font-family: ${props=>props.theme.fonts.primary};
     background: ${props=>props.theme.colors.background};
@@ -20,7 +20,7 @@ const CheckErrorContainer = styled.section`
     font-family: ${props=>props.theme.fonts.primary};
     background: ${props=>props.theme.colors.white};
     gap: 1rem;
-    padding: 2.5rem 3rem;
+    padding: 4rem 3rem;
 `;
 
 const CheckDecoration = styled.section`
@@ -44,13 +44,13 @@ const CheckDecoration = styled.section`
         
         0 0
     );
-    padding: 2rem;
+    padding: 4rem 2rem;
     font-family: ${props=>props.theme.fonts.primary};
 `;
 
 
 const CheckTitle = styled.h1`
-    font-size: ${PxToRem(38)};
+    font-size: ${PxToRem(36)};
     font-weight: 700;
     font-family: inherit;
     color:${props=>props.theme.colors.background};
@@ -61,6 +61,12 @@ const CheckTitle = styled.h1`
     text-transform: uppercase;
     text-align: center;
     margin: 0;
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(32)};
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(28)};
+    `)};
 `;
 
 const CheckSubTitle = styled.h2`
@@ -75,6 +81,12 @@ const CheckSubTitle = styled.h2`
     text-transform: uppercase;
     text-align: center;
     margin: 0;
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(24)};
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(20)};
+    `)};
 `;
 
 const CheckAddress = styled.h3`
@@ -89,6 +101,12 @@ const CheckAddress = styled.h3`
     text-transform: uppercase;
     text-align: center;
     margin: 0;
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(16)};
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(16)};
+    `)};
 `;
 
 const CheckMethod = styled.h3`
@@ -103,6 +121,12 @@ const CheckMethod = styled.h3`
     text-transform: uppercase;
     text-align: center;
     margin: 0;
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(16)};
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(16)};
+    `)};
 `;
 
 const CheckItems = styled.section`
@@ -110,13 +134,14 @@ const CheckItems = styled.section`
     gap:0.5rem;
     padding: 1rem 3rem;
     border-bottom: 1px dotted ${props=>props.theme.colors.background};
-
+    width:100%;
 `;
 
 const CheckProduct = styled.section`
 
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto;
     box-sizing: border-box;
     justify-content: space-around;
     align-items: center;
@@ -125,7 +150,22 @@ const CheckProduct = styled.section`
     gap:.5rem;
     width: 100%;
     padding: .75rem;
-    height: 200px;
+
+
+    ${mediaAdjustments(css`
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2,auto);
+        grid-template-areas: 
+        "number title title total"
+        "number price discount total";
+    `)};
+    ${phoneAdjustments(css`
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2,auto);
+        grid-template-areas: 
+        "number title title title"
+        "number price discount total";
+    `)};
 `;
 
 
@@ -141,6 +181,14 @@ const CheckProductName = styled.p`
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: ${PxToRem(24)};
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(20)};
+        text-align: left;
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(20)};
+        text-align: left;
+    `)};
 `;
 
 const CheckProductOriginalPrice = styled.p`
@@ -151,6 +199,14 @@ const CheckProductOriginalPrice = styled.p`
     margin:0;
     text-align: center;
     font-size: ${PxToRem(20)};
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(18)};
+        text-align: left;
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(18)};
+        text-align: left;
+    `)};
 `;
 
 const CheckProductDiscount = styled.p`
@@ -161,6 +217,13 @@ const CheckProductDiscount = styled.p`
     margin:0;
     text-align: start;
     font-size: ${PxToRem(20)};
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(18)};
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(18)};
+    `)};
+    
 `;
 
 const CheckProductNumber = styled.p`
@@ -171,6 +234,14 @@ const CheckProductNumber = styled.p`
     margin:0;
     text-align: start;
     font-size: ${PxToRem(20)};
+    ${mediaAdjustments(css`
+        text-align: right;
+        padding-right: 2rem;
+    `)};
+    ${phoneAdjustments(css`
+        text-align: right;
+        padding-right: 2rem;
+    `)};
 `;
 
 const CheckProductTotal = styled.p`
@@ -180,7 +251,15 @@ const CheckProductTotal = styled.p`
     margin:0;
     text-align: right;
     font-weight: 700;
+    padding-right: 2rem;
     font-size: ${PxToRem(20)};
+    ${mediaAdjustments(css`
+        font-size: ${PxToRem(16)};
+    `)};
+    ${phoneAdjustments(css`
+        font-size: ${PxToRem(16)};
+    `)};
+    
 `;
 
 
@@ -198,6 +277,12 @@ const CheckPayment = styled.div`
         box-sizing: border-box;
         font-size: ${PxToRem(28)};
         padding: 0.75rem 2rem;
+        transition: ${p=>p.theme.buttons.transition};
+        cursor: pointer;
+        &:hover{
+            transform: ${p=>p.theme.buttons.scale};
+            filter: ${p=>p.theme.buttons.bright};
+        }
     }
 `;
 
