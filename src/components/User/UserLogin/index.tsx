@@ -55,7 +55,7 @@ const UserLogin = () => {
                 <UserCreateTitle>Ingresa a tu cuenta</UserCreateTitle>
                 <UserFormFieldset>
                     <UserFormLine>
-                        <UserFormLabel>Correo Electrónico</UserFormLabel>
+                        <UserFormLabel htmlFor="email">Correo Electrónico</UserFormLabel>
                         <UserFormInput
                             id="email"
                             name="email"
@@ -71,7 +71,7 @@ const UserLogin = () => {
                         </UserFormFeedback>
                     </UserFormLine>
                     <UserFormLine>
-                        <UserFormLabel>Contraseña</UserFormLabel>
+                        <UserFormLabel htmlFor="password">Contraseña</UserFormLabel>
                         <UserFormInput
                             id="password"
                             name="password"

@@ -83,7 +83,7 @@ const UserCreate = () => {
                 <UserCreateTitle>Crea tu cuenta para comprar</UserCreateTitle>
                 <UserFormFieldset>
                 <UserFormLine>
-                    <UserFormLabel>Nombre(s)</UserFormLabel>
+                    <UserFormLabel htmlFor="name">Nombre(s)</UserFormLabel>
                     <UserFormInput
                     id="name"
                     name="name"
@@ -102,7 +102,7 @@ const UserCreate = () => {
                 </UserFormLine>
 
                 <UserFormLine>
-                    <UserFormLabel>Apellido Paterno</UserFormLabel>
+                    <UserFormLabel htmlFor="paternal_surname">Apellido Paterno</UserFormLabel>
                     <UserFormInput
                     id="paternal_surname"
                     name="paternal_surname"
@@ -121,7 +121,7 @@ const UserCreate = () => {
                 </UserFormLine>
 
                 <UserFormLine>
-                    <UserFormLabel>Apellido Materno</UserFormLabel>
+                    <UserFormLabel htmlFor="maternal_surname">Apellido Materno</UserFormLabel>
                     <UserFormInput
                     id="maternal_surname"
                     name="maternal_surname"
@@ -134,7 +134,7 @@ const UserCreate = () => {
                 </UserFormLine>
 
                 <UserFormLine>
-                    <UserFormLabel>Fecha de Nacimiento</UserFormLabel>
+                    <UserFormLabel htmlFor="datebirth">Fecha de Nacimiento</UserFormLabel>
                     <UserFormInput
                     id="datebirth"
                     name="datebirth"
@@ -153,7 +153,7 @@ const UserCreate = () => {
                 </UserFormLine>
 
                 <UserFormLine>
-                    <UserFormLabel>RFC (Para aduana y facturación)</UserFormLabel>
+                    <UserFormLabel htmlFor="rfc">RFC (Para aduana y facturación)</UserFormLabel>
                     <UserFormInput
                     id="rfc"
                     name="rfc"
@@ -172,7 +172,7 @@ const UserCreate = () => {
                 </UserFormLine>
 
                 <UserFormLine>
-                    <UserFormLabel>Correo Electrónico</UserFormLabel>
+                    <UserFormLabel htmlFor="email">Correo Electrónico</UserFormLabel>
                     <UserFormInput
                     id="email"
                     name="email"
@@ -191,7 +191,7 @@ const UserCreate = () => {
                 </UserFormLine>
 
                 <UserFormLine>
-                    <UserFormLabel>Contraseña</UserFormLabel>
+                    <UserFormLabel htmlFor="password">Contraseña</UserFormLabel>
                     <UserFormInput
                     id="password"
                     name="password"
