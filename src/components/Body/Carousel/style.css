@@ -25,3 +25,37 @@
     font-weight: 400;
     color: #FFFFFF;
 }
+
+
+@media screen and (max-width: 1250px) and (min-width: 750px) {
+    .carousel-caption h5{
+        font-family: "Stack Sans Notch", sans-serif ;
+        font-size: 38px;
+        font-weight: 700;
+        color: #FFFFFF;
+    }
+    .carousel-caption p{
+        font-family: "Stack Sans Text", sans-serif ;
+        font-size: 18px;
+        font-weight: 400;
+        color: #FFFFFF;
+    }
+}
+
+
+@media screen and (max-width: 750px) {
+    .carousel-caption h5{
+        font-family: "Stack Sans Notch", sans-serif ;
+        font-size: 32px;
+        font-weight: 700;
+        color: #FFFFFF;
+    }
+    .carousel-caption p{
+        font-family: "Stack Sans Text", sans-serif ;
+        font-size: 12px;
+        font-weight: 400;
+        color: #FFFFFF;
+    }
+    
+}
+

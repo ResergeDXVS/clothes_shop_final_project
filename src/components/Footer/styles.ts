@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { FlexboxStructure, phoneAdjustments, PxToRem } from "../../theme/styles";
+import { FlexboxStructure, PxToRem } from "../../theme/styles";
 
 const FooterStructure = styled.footer`
     ${FlexboxStructure("row","center","center")};
@@ -44,6 +44,7 @@ const FooterInfo = styled.section`
             font-weight: 300;
             text-decoration: none;
             cursor: pointer;
+            text-align: center;
         }
     }
 `;

@@ -12,7 +12,8 @@ const Header = () => {
     const username = useAppSelector( state => state.user.actualUser );
     return(
         <HeaderBase>
-            <HeaderLogo>
+            <HeaderLogo
+                onClick={()=>{navigate("/")}}>
                 <img src="/img/GAME-DEX-LOGO.png"
                 alt="GAMES DEX"/>
                 <p>GAME DEX</p>
@@ -45,6 +46,7 @@ const Header = () => {
                 {
                     username!== null && (
                         <div
+                            id="icon-bag"
                             data-testid="bag" 
                             className="icon-bag" 
                             onClick={()=>navigate(`/cart/${username?.id}`)}>

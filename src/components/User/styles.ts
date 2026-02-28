@@ -14,6 +14,7 @@ const UserContainerForm = styled.form`
         180deg, 
         ${props=>props.theme.colors.background} 50%, 
         ${props=>props.theme.colors.white} 50%);
+    padding: .25rem 1.75rem;
 `;
 
 const UserCreateTitle = styled.h1`
@@ -27,13 +28,12 @@ const UserCreateTitle = styled.h1`
 
 
 const UserFormFieldset = styled.fieldset`
-    margin: 0 auto 1.5rem auto;
+    margin: 0 1rem 1.5rem 1rem;
     padding: 1.5rem 2rem;
     background-color: ${props => props.theme.colors.white};
     border: 1px solid ${props => props.theme.colors.gray};
     border-radius: 2rem;  
-    width: 100%;
-    max-width: 36rem;
+    width: min(100%,36rem);
 `;
 
 const UserFormLine = styled.div`
@@ -49,7 +49,7 @@ const UserFormLine = styled.div`
 
 const UserFormLabel = styled.label`
     grid-area: etiqueta;
-    width: 300px;
+    width: min(100%,280px);
     font-size: ${PxToRem(16)};
     font-weight: bold;
     text-transform: uppercase;
@@ -68,6 +68,8 @@ const UserFormInput = styled.input<FormCheck>`
     font-weight: 600;
     border-radius: 0.5rem;
     padding: 0.25rem 0.75rem;
+    width: 100%;
+    min-width:200px;
     &::placeholder {
         color: ${props => props.theme.colors.gray};
     }

@@ -17,6 +17,10 @@ const UserHeaderLogo = styled.div`
     align-items: center;
     margin: 0;
     width: fit-content;
+    transition: ${p=>p.theme.buttons.transition};
+    &:hover{
+        transform: ${p=>p.theme.buttons.scale};
+    }
     img{
         width: 80px;
         height: auto;

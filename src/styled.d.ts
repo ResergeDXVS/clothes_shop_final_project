@@ -17,6 +17,12 @@ declare module 'styled-components' {
         hovers:{
             scale:string,
             transition:string,
+            bright:string,
+        },
+        buttons:{
+            scale:string,
+            transition:string,
+            bright:string,
         },
     }
 }

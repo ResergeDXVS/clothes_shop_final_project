@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "../../../redux/store/store";
 import { UserHeader, UserHeaderLogo } from "../../Header/HeaderMin/styles";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../../../redux/slices/cartSlice";
-import Product from "../../Body/Products";
 
 
 const Check = () => {
@@ -89,7 +88,8 @@ const Check = () => {
     }
     return(
         <Fragment>
-            <UserHeader>
+            <UserHeader
+                onClick={()=>{navigate("/")}}>
                 <UserHeaderLogo>
                     <img src="/img/GAME-DEX-LOGO.png" alt="GAMES DEX"/>
                     <p>GAME DEX</p>

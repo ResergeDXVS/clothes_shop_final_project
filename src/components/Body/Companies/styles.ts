@@ -6,7 +6,7 @@ const CompaniesGrid = styled.section`
     margin: 1.75rem 2.75rem;
     padding: 2rem;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(80px,1fr));
     grid-template-rows: repeat(2,75px);
     justify-content: center;
     align-items: center;

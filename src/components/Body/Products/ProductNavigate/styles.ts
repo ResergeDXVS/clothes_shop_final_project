@@ -16,7 +16,7 @@ const ProductNavigateTitle = styled.h1`
     margin: 1rem 3rem .75rem 3rem;
     border-bottom: 1px solid ${props=>props.theme.colors.background};
     text-transform: uppercase;
-
+    text-align: center;
 `;
 
 const ProductNavigateErrorContainer = styled.div`

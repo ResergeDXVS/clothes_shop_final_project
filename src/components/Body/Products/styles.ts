@@ -99,6 +99,11 @@ const ProductButton = styled.button`
     box-sizing: border-box;
     margin: .75rem 1rem;
     padding: 0.5rem;
+    transition: ${p=>p.theme.buttons.transition};
+    &:hover{
+        transform: ${p=>p.theme.buttons.scale};
+        filter: ${p=>p.theme.buttons.bright};
+    }
 `;
 
 export {

@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { CartContainer } from "../styles";
 import { PaymentMethodAddButton, PaymentMethodDecoration, PaymentMethodDiv, PaymentMethodForm, PaymentMethodInput, PaymentMethodLabel, PaymentMethodPayment, PaymentMethodTitle } from "./styles";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/store/store";
 import { UserHeader, UserHeaderLogo } from "../../Header/HeaderMin/styles";
 import CreditForm from "./CreditForm";
@@ -124,7 +124,8 @@ const PaymentMethod = () =>{
 
     return(
         <Fragment>
-            <UserHeader>
+            <UserHeader
+                onClick={()=>{navigate("/")}}>
                 <UserHeaderLogo>
                     <img src="/img/GAME-DEX-LOGO.png" alt="GAMES DEX"/>
                     <p>GAME DEX</p>

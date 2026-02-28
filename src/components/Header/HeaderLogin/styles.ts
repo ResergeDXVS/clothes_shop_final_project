@@ -34,6 +34,7 @@ const LoginContainer = styled.div`
         margin: 0;
         text-transform: uppercase;
     }
+    
 
 `;
 
@@ -49,6 +50,11 @@ const LoginButton = styled.button<{$login:boolean}>`
         `${ theme.colors.marks}`};
     color: ${ props => props.theme.colors.white };
     font-size: ${PxToRem(16)};
+    transition: ${p=>p.theme.buttons.transition};
+    &:hover{
+        transform: ${p=>p.theme.buttons.scale};
+        filter: ${p=>p.theme.buttons.bright};
+    }
 `;
 
 export {

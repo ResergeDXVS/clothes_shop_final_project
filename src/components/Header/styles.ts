@@ -1,14 +1,13 @@
-import styled from "styled-components";
-import { FlexboxStructure, PxToRem} from "../../theme/styles";
+import styled, { css } from "styled-components";
+import { FlexboxStructure, mediaAdjustments, phoneAdjustments, PxToRem} from "../../theme/styles";
 
 
 const HeaderBase = styled.header`
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto;
     grid-template-areas: 
-        "logo catalog icons"
-        "search search search";
+        "logo catalog icons";
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -16,6 +15,22 @@ const HeaderBase = styled.header`
     padding: 1.5rem 2.75rem;
     box-sizing: border-box;
     background-color: ${props => props.theme.colors.background};
+
+    ${mediaAdjustments(css`
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 
+            "logo catalog icons";
+        padding: 1rem 1.5rem;
+    `)};
+    ${phoneAdjustments(css`
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas: 
+            "logo icons"
+            "catalog catalog";
+        padding: 1rem;
+    `)};
 `;
 
 const HeaderLogo = styled.div`
@@ -25,8 +40,11 @@ const HeaderLogo = styled.div`
     justify-content: flex-start;
     align-items: center;
     margin-left: 2rem;
-
     width: fit-content;
+    transition: ${p=>p.theme.buttons.transition};
+    &:hover{
+        transform: ${p=>p.theme.buttons.scale};
+    }
     img{
         width: 120px;
         height: auto;
@@ -55,7 +73,19 @@ const HeaderOptions = styled.div`
         line-height: 1.15;
         font-weight: 900;
         text-decoration: none;
+        cursor: pointer;
+        transition: ${p=>p.theme.hovers.transition};
+        &:hover{
+            transform: ${p=>p.theme.hovers.scale};
+            filter: ${p=>p.theme.hovers.bright};
+        }
     }
+    ${mediaAdjustments(css`
+        gap:1.5rem;
+    `)};
+    ${phoneAdjustments(css`
+        gap:3rem;
+    `)};
     
 `;
 

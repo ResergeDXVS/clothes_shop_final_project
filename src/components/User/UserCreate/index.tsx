@@ -72,7 +72,8 @@ const UserCreate = () => {
 
     return (
         <Fragment>
-            <UserHeader>
+            <UserHeader
+                onClick={()=>{navigate("/")}}>
                 <UserHeaderLogo>
                 <img src="/img/GAME-DEX-LOGO.png" alt="GAMES DEX" />
                 <p>GAME DEX</p>
