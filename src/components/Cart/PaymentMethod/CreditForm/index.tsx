@@ -35,7 +35,6 @@ const CreditForm = ({ visible,onClose,onAlert }: PaymentMethodProps) => {
         const { name, value } = e.target;
         let newValue = value;
 
-        // Formatear la fecha de expiración como MM/YY
         if (name === "expiration") {
         let digits = newValue.replace(/\D/g, "");
         if (digits.length > 2) {
