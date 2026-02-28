@@ -38,13 +38,17 @@ const FooterInfo = styled.section`
         ${FlexboxStructure("row","space-evenly","center")};
         gap: 2.5rem;
         margin: 0.5rem 0 0.7rem 0;
-        a{
+        
+        button{
             font-family:inherit;
+            border-color: #00000000;
+            background-color: #00000000;
             color: ${props => props.theme.colors.white};
             font-weight: 300;
             text-decoration: none;
             cursor: pointer;
             text-align: center;
+            
         }
     }
 `;
@@ -61,15 +65,18 @@ const FooterNetworks = styled.section`
         ${FlexboxStructure("row","space-between","center")};
         gap: 2.5rem;
         margin: 0.5rem 0 0.7rem 0;
-        a{
+        button{
             ${FlexboxStructure("row","center","center")};
             text-decoration: none;
             cursor: pointer;
+            border-color: #00000000;
+            background-color: #00000000;
             i{
                 color: ${props => props.theme.colors.white};
                 font-size: ${PxToRem(28)};
                 margin: 0;
                 padding: 0;
+                
             }
         }
     }

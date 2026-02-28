@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { LoginButton, LoginContainer, UserContainer } from "./styles";
+import { LoginButton, LoginContainer } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../redux/store/store";
 import { useDispatch } from "react-redux";

@@ -8,24 +8,24 @@ const Footer = () => {
             <FooterInfo>
                 <FooterTitles>Adicional</FooterTitles>
                 <div>
-                    <a href="#">Sobre Nosotros</a>
-                    <a href="#">Facturación</a>
-                    <a href="#">Sucursales</a>
-                    <a href="#">Terminos y condiciones</a>
+                    <button type="button">Sobre Nosotros</button>
+                    <button type="button">Facturación</button>
+                    <button type="button">Sucursales</button>
+                    <button type="button">Terminos y condiciones</button>
                 </div>
             </FooterInfo>
             <FooterNetworks>
                 <FooterTitles>Redes</FooterTitles>
                 <div>
-                    <a href="#">
+                    <button type="button">
                         <i className="fi fi-brands-facebook"/>
-                    </a>
-                    <a href="#">
+                    </button>
+                    <button type="button">
                         <i className="fi fi-brands-instagram"/>
-                    </a>
-                    <a href="#">
+                    </button>
+                    <button type="button">
                         <i className="fi fi-brands-twitter-alt"/>
-                    </a>
+                    </button>
                 </div>
             </FooterNetworks>
             <FooterContacts>
