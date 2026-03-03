@@ -14,7 +14,7 @@ const Carousel = () => {
                     </div>
                 </div>
                 <div className="carousel-item">
-                    <img src="/img/carousel/carusel_poster.jpeg" className="d-block w-100" alt="Compra más de 1500 pesos en productos y te regalamos un Poster de la pelicula de super mario galaxy"/>
+                    <img src="/img/carousel/carusel_poster.jpeg" className="d-block w-100" lang="en" alt="Super mario galaxy poster"/>
                     <div className="carousel-caption">
                         <h5>Compra más de $1500</h5>
                         <p>Y de regalo te daremos un poster de Super Mario Galaxy "La Película".</p>
