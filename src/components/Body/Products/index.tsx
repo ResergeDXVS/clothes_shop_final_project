@@ -38,22 +38,26 @@ const Product = ({product}:ProductProps) =>{
                     <ProductImagen>
                         <img
                             src={product.image}
-                            alt={product.name}/>
+                            alt={`Imagen del producto ${product.name}`}/>
                     </ProductImagen>
                     <ProductTitle>{product.name}</ProductTitle>
                     
                     {
                         product.promotion && (
                             <>
-                                <ProductDiscount>{product.promotion}%</ProductDiscount>
+                                <ProductDiscount
+                                    aria-label="Descuento asignado"
+                                    >{product.promotion}%</ProductDiscount>
                                 <ProductPrice 
-                                    $isTotal={false}>
+                                    $isTotal={false} 
+                                    aria-label="Precio original">
                                     ${product.price}
                                 </ProductPrice>
                             </>
                         )
                     }
                     <ProductPrice 
+                        aria-label="Precio final del producto"
                         data-testid="total_price"
                         $isTotal={true}>
                             ${((product.price * (1-(product.promotion/100)))).toFixed(2)}
@@ -62,6 +66,7 @@ const Product = ({product}:ProductProps) =>{
                     
                 </ProductContainer>
                 <ProductButton
+                    aria-label="Agregar producto al carrito"
                     onClick={()=>addProduct(product)}>
                         Guardar al carrito
                 </ProductButton>

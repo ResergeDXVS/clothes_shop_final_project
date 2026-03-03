@@ -31,7 +31,7 @@ const ProductDetail = () => {
                 <ProductDetailImagen>
                     <img
                         src={product?.image}
-                        alt={product?.name}/>
+                        alt={`Fotografía del producto ${product?.name}`}/>
                 </ProductDetailImagen>
                 <ProductDetailTitle>
                     <h2>Nombre del producto: </h2>

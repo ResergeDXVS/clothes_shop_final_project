@@ -19,8 +19,9 @@ const ProductNavigate = () => {
     );
 
     const errorListView = (message:string) => (
-        <ProductNavigateErrorContainer>
-            <ProductNavigateError>{message}</ProductNavigateError>
+        <ProductNavigateErrorContainer aria-labelledby="productNavigateModalError">
+            <ProductNavigateError
+                id="productNavigateModalError">{message}</ProductNavigateError>
         </ProductNavigateErrorContainer>
     );
 

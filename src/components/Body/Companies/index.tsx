@@ -4,7 +4,8 @@ import { CompaniesGrid, CompanyElement } from "./styles";
 const Companies = () => {
     const companies = useAppSelector(state=>state.data.companies);
     return(
-        <CompaniesGrid>
+        <CompaniesGrid
+            aria-label="Sección de compañias de videojuegos disponibles en tienda">
             {
                 companies && (
                     companies.map(data => {
@@ -13,7 +14,7 @@ const Companies = () => {
                             <CompanyElement key={id}>
                                 <img 
                                     src={image}
-                                    alt={name}/>
+                                    alt={`Logo de la compañia ${name}`}/>
                             </CompanyElement>
                         );
                     })
