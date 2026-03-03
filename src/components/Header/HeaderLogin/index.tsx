@@ -18,12 +18,14 @@ const HeaderLogin = () => {
         <Fragment>
             <p>Para comprar en Game Dex</p>
             <LoginButton $login={true}
-                onClick={()=>navigate("/user/login")}>
+                onClick={()=>navigate("/user/login")}
+                aria-label="Ir a la pantalla para ingresar a cuenta">
                 Ingresar a cuenta
             </LoginButton>
             <p>O</p>
             <LoginButton $login={false}
-                onClick={()=>navigate("/user/create")}>
+                onClick={()=>navigate("/user/create")}
+                aria-label="Ir a pantalla para crear un nuevo usuario">
                 Crear Usuario
             </LoginButton>
         </Fragment>
@@ -35,7 +37,8 @@ const HeaderLogin = () => {
                 Hola {actualUser?.name}
             </p>
             <LoginButton $login={true}
-                onClick={()=>closeSessionAction()}>
+                onClick={()=>closeSessionAction()}
+                aria-label="Botón para cerrar sesión del usuario">
                 Cerrar Sesión
             </LoginButton>
         </Fragment>

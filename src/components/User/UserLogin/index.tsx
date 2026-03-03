@@ -45,7 +45,8 @@ const UserLogin = () => {
     return(
         <Fragment>
             <UserHeader
-                onClick={()=>{navigate("/")}}>
+                onClick={()=>{navigate("/")}}
+                aria-label="Ir a la pantalla principal">
                 <UserHeaderLogo>
                     <img src="/img/GAME-DEX-LOGO.png"
                     alt="GAMES DEX"/>
