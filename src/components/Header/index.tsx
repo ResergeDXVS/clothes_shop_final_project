@@ -47,7 +47,7 @@ const Header = () => {
                 </Link>
             </HeaderOptions>
             <HeaderIcons>
-                <section id="icon-user" 
+                <div id="icon-user" 
                     data-testid="icon_user"
                     aria-label="Acciones de usuario"
                     aria-controls="userActionsModal"
@@ -66,7 +66,7 @@ const Header = () => {
                         className={showLogin ? "user--show" : ""}>
                         <HeaderLogin />
                     </UserContainer>
-                </section>
+                </div>
 
 
                 {
