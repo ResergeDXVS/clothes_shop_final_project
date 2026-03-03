@@ -68,7 +68,8 @@ const Check = () => {
                 <CheckPayment>
                     <button
                         data-testid="button_return" 
-                        onClick={()=>clearAndReturn()}>
+                        onClick={()=>clearAndReturn()}
+                        aria-label="Botón para regresar a la página principal">
                         Regresar a la página
                     </button>
                     

@@ -80,7 +80,11 @@ const PaymentMethod = () =>{
                     )) }
                 <PaymentMethodAddButton 
                     data-testid="add_address_button"
-                    onClick={()=>setShowAddressForm(true)}>
+                    onClick={()=>setShowAddressForm(true)}
+                    aria-label="Agregar una nueva dirección de envio"
+                    aria-haspopup="dialog"
+                    aria-controls="addressAddModal"
+                    >
                     <i className="fi fi-rs-plus"></i>
                     <p>Agregar dirección</p>
                 </PaymentMethodAddButton>
@@ -106,7 +110,10 @@ const PaymentMethod = () =>{
                     ))}
                     <PaymentMethodAddButton 
                         data-testid="add_method_button"
-                        onClick={()=>setShowForm(true)}>
+                        onClick={()=>setShowForm(true)}
+                        aria-label="Agregar una nueva tarjeta para el pago"
+                        aria-haspopup="dialog"
+                        aria-controls="creditAddModal">
                         <i className="fi fi-rs-plus"></i>
                         <p>Agregar método de pago</p>
                     </PaymentMethodAddButton>
@@ -114,7 +121,8 @@ const PaymentMethod = () =>{
                 <PaymentMethodPayment>
                     <button
                         data-testid="go_button" 
-                        type="button" onClick={handlePay}>
+                        type="button" onClick={handlePay}
+                        aria-label="Realizar el pago">
                         Pagar
                     </button>
                 </PaymentMethodPayment>

@@ -49,15 +49,17 @@ const Cart = () => {
                             return(
                                 <CartProduct key={product.id}>
                                     <CartProductImage
-                                    alt={product.name}
+                                    alt={`Imagen del producto ${product.name}`}
                                     src={product.image}/>
                                     <CartProductName>
                                         {product.name}
                                     </CartProductName>
-                                    <CartProductOriginalPrice>
+                                    <CartProductOriginalPrice
+                                        aria-label="Precio original">
                                         ${product.price}
                                     </CartProductOriginalPrice>
                                     <CartProductDiscount
+                                         aria-label="Descuento actual"
                                         data-testid="product_promotion">
                                         {
                                             product.promotion >0 ?
@@ -74,13 +76,16 @@ const Cart = () => {
                                         max="100"
                                         value={count}
                                         onChange={(e)=>updateItem(product.id,Number(e.target.value))}
+                                        aria-label="Cantidad de productos"
                                     />
-                                    <CartProductTotal data-testid="product_total_price">
+                                    <CartProductTotal data-testid="product_total_price"
+                                        aria-label="Precio final de compra">
                                         ${(count*(product.price * (1-(product.promotion/100)))).toFixed(2)}
                                     </CartProductTotal>
                                     <CartDeleteButton
                                         data-testid="product_delete"
                                         className="fi fi-rs-trash cart__button"
+                                        aria-label="Eliminar producto del carrito"
                                         onClick={()=>deleteItem(product.id)}/>
                                 </CartProduct>
                             )
@@ -90,7 +95,8 @@ const Cart = () => {
                 <CartPayment>
                     <button
                         data-testid="go_to_pay_button"
-                        onClick={()=>goPaymentMethod()}>
+                        onClick={()=>goPaymentMethod()}
+                        aria-label="Botón para iniciar el proceso de pago">
                         Pagar ${userCart?.total}
                     </button>
                 </CartPayment>

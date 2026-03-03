@@ -73,6 +73,8 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
     return (
         <Fragment>
             <AddressFormBase 
+                id="addressAddModal"
+                role="dialog"
                 data-testid="form_address"
                 className={ visible ? `form--show`:``}>
                 <AddressCancel
@@ -91,6 +93,7 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                             type="text"
                             value={form.address}
                             onChange={handleChange}
+                            aria-label="Agregar nombre de la calle"
                         />
                         <p>Favor de agregar una calle</p>
                     </AddressDiv>
@@ -104,6 +107,7 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                             type="text"
                             value={form.external_number}
                             onChange={handleChange}
+                            aria-label="Agregar número exterior de la calle"
                         />
                         <p>Favor de agregar un número exterior</p>
                     </AddressDiv>
@@ -117,6 +121,7 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                             type="text"
                             value={form.internal_number}
                             onChange={handleChange}
+                            aria-label="Agregar número interior de la calle"
                         />
                         
                     </AddressDiv>
@@ -131,6 +136,7 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                             value={form.postal}
                             maxLength={5}
                             onChange={handleChange}
+                            aria-label="Agregar código postal (5 dígitos)"
                         />
                         <p>Favor de agregar código postal válido</p>
                     </AddressDiv>
@@ -144,6 +150,7 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                             type="text"
                             value={form.suburb}
                             onChange={handleChange}
+                            aria-label="Agregar nombre de la colonia"
                         />
                         <p>Favor de agregar la colonia</p>
                     </AddressDiv>
@@ -157,13 +164,15 @@ const AddressForm = ({ visible,onClose,onAlert }: AddressMethodProps) => {
                             type="text"
                             value={form.contry}
                             onChange={handleChange}
+                            aria-label="Agregar nombre del país"
                         />
                         <p>Favor de agregar el país</p>
                     </AddressDiv>
 
                     <AddressAddButton 
                         data-testid="form_address_submit"
-                        type="submit">
+                        type="submit"
+                        aria-label="Agregar dirección para envio">
                         <i className="fi fi-rs-plus"></i>
                         <p>Agregar</p>
                     </AddressAddButton>

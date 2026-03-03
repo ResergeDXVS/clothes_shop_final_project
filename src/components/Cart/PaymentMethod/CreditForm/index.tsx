@@ -81,6 +81,8 @@ const CreditForm = ({ visible,onClose,onAlert }: PaymentMethodProps) => {
     return (
         <Fragment>
             <MethodFormBase 
+                id="creditAddModal"
+                role="dialog"
                 data-testid="form_credit"
                 className={ visible ? `form--show`:``}>
                 <MethodCancel
@@ -102,6 +104,7 @@ const CreditForm = ({ visible,onClose,onAlert }: PaymentMethodProps) => {
                             maxLength={16}
                             value={form.card_number}
                             onChange={handleChange}
+                            aria-label="Agregar los 16 números de tarjeta"
                         />
                         <p>Favor de agregar una tarjeta válida</p>
                     </MethodDiv>
@@ -117,6 +120,7 @@ const CreditForm = ({ visible,onClose,onAlert }: PaymentMethodProps) => {
                             maxLength={5}
                             value={form.expiration}
                             onChange={handleChange}
+                            aria-label="Agregar el número de expiración (MM/AA)"
                         />
                         <p>Favor de agregar una fecha valida</p>
                     </MethodDiv>
@@ -132,13 +136,15 @@ const CreditForm = ({ visible,onClose,onAlert }: PaymentMethodProps) => {
                             maxLength={3}
                             value={form.cvc}
                             onChange={handleChange}
+                            aria-label="Agregar los 3 dígitos de verificación"
                         />
                         <p>Favor de agregar 3 dígitos</p>
                     </MethodDiv>
 
                     <MethodAddButton 
                         data-testid="form_credit_submit"
-                        type="submit">
+                        type="submit"
+                        aria-label="Agregar datos de la nueva tarjeta">
                         <i className="fi fi-rs-plus"></i>
                         <p>Agregar</p>
                     </MethodAddButton>
