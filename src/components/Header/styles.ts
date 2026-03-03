@@ -97,7 +97,7 @@ const HeaderIcons = styled.section`
     transition: ${props=>props.theme.hovers.transition};
     gap:2rem;
     margin-right: 2rem;
-    >section{
+    >div{
         display: flex;
         flex-direction: row;
         justify-content: center;
