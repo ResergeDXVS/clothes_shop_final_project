@@ -65,7 +65,8 @@ const UserLogin = () => {
                             value={form.email}
                             onChange={handleChange}
                             $invalid={submitted && !form.email}
-                            $capitalize={false}/>
+                            $capitalize={false}
+                            aria-label="Ingresa tu correo electrónico"/>
                         <UserFormFeedback
                             $invalid={submitted && !form.email}
                             $capitalize={null}>
@@ -81,7 +82,8 @@ const UserLogin = () => {
                             value={form.password}
                             onChange={handleChange}
                             $invalid={submitted && !form.password}
-                            $capitalize={false}/>
+                            $capitalize={false}
+                            aria-label="Ingresa tu contraseña"/>
                         <UserFormFeedback
                             $invalid={submitted && !form.password}
                             $capitalize={null}>
@@ -92,6 +94,7 @@ const UserLogin = () => {
                         <UserFormButtonSubmit 
                             id="submit"
                             type="submit"
+                            aria-label="Envar datos para acceder a tu cuenta."
                             value="Ingresar"/>
                     </UserFormLine>
                 </UserFormFieldset>

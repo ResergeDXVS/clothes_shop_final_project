@@ -94,6 +94,7 @@ const UserCreate = () => {
                     onChange={handleChange}
                     $invalid={submitted && !form.name}
                     $capitalize={true}
+                    aria-label="Ingresa tus Nombres"
                     />
                     <UserFormFeedback
                     $invalid={submitted && !form.name}
@@ -113,6 +114,7 @@ const UserCreate = () => {
                     onChange={handleChange}
                     $invalid={submitted && !form.paternal_surname}
                     $capitalize={true}
+                    aria-label="Ingresa tu apellido parterno"
                     />
                     <UserFormFeedback
                     $invalid={submitted && !form.paternal_surname}
@@ -132,6 +134,7 @@ const UserCreate = () => {
                     onChange={handleChange}
                     $invalid={null}
                     $capitalize={true}
+                    aria-label="Ingresa tu apellido materno"
                     />
                 </UserFormLine>
 
@@ -145,6 +148,7 @@ const UserCreate = () => {
                     onChange={handleChange}
                     $invalid={submitted && !form.datebirth}
                     $capitalize={true}
+                    aria-label="Ingresa tu fecha de nacimiento DD/MM/AAAA"
                     />
                     <UserFormFeedback
                     $invalid={submitted && !form.datebirth}
@@ -164,6 +168,7 @@ const UserCreate = () => {
                     onChange={handleChange}
                     $invalid={submitted && !form.rfc}
                     $capitalize={true}
+                    aria-label="Ingresa tu RFC (para asuntos de aduana y facturación)"
                     />
                     <UserFormFeedback
                     $invalid={submitted && !form.rfc}
@@ -183,6 +188,7 @@ const UserCreate = () => {
                     onChange={handleChange}
                     $invalid={submitted && !form.email}
                     $capitalize={false}
+                    aria-label="Ingresa tu correo electrónico"
                     />
                     <UserFormFeedback
                     $invalid={submitted && !form.email}
@@ -202,6 +208,7 @@ const UserCreate = () => {
                     onChange={handleChange}
                     $invalid={submitted && !form.password}
                     $capitalize={false}
+                    aria-label="Ingresa tu contraseña para tu cuenta"
                     />
                     <UserFormFeedback
                     $invalid={submitted && !form.password}
@@ -216,6 +223,7 @@ const UserCreate = () => {
                     id="submit"
                     type="submit"
                     value="Crear Cuenta"
+                    aria-label="Enviar información para crear tu cuenta"
                     />
                 </UserFormLine>
                 </UserFormFieldset>
