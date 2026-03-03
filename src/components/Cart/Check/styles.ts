@@ -198,13 +198,13 @@ const CheckProductOriginalPrice = styled.p`
     color:${props=> props.theme.colors.details};
     margin:0;
     text-align: center;
-    font-size: ${PxToRem(20)};
+    font-size: ${PxToRem(24)};
     ${mediaAdjustments(css`
-        font-size: ${PxToRem(18)};
+        font-size: ${PxToRem(20)};
         text-align: left;
     `)};
     ${phoneAdjustments(css`
-        font-size: ${PxToRem(18)};
+        font-size: ${PxToRem(20)};
         text-align: left;
     `)};
 `;
@@ -213,15 +213,15 @@ const CheckProductDiscount = styled.p`
     width: 100%;
     font-family: ${props=>props.theme.fonts.secondary};
     grid-area: discount;
-    color:${props=> props.theme.colors.marks};
+    color:${props=> props.theme.colors.background};
     margin:0;
     text-align: start;
-    font-size: ${PxToRem(20)};
+    font-size: ${PxToRem(24)};
     ${mediaAdjustments(css`
-        font-size: ${PxToRem(18)};
+        font-size: ${PxToRem(20)};
     `)};
     ${phoneAdjustments(css`
-        font-size: ${PxToRem(18)};
+        font-size: ${PxToRem(20)};
     `)};
     
 `;
@@ -230,10 +230,10 @@ const CheckProductNumber = styled.p`
     width: 100%;
     font-family: ${props=>props.theme.fonts.secondary};
     grid-area: number;
-    color:${props=> props.theme.colors.marks};
+    color:${props=> props.theme.colors.details};
     margin:0;
     text-align: start;
-    font-size: ${PxToRem(20)};
+    font-size: ${PxToRem(24)};
     ${mediaAdjustments(css`
         text-align: right;
         padding-right: 2rem;
@@ -247,17 +247,17 @@ const CheckProductNumber = styled.p`
 const CheckProductTotal = styled.p`
     grid-area: total;
     font-family: ${props=>props.theme.fonts.secondary};
-    color:${props=> props.theme.colors.background};
+    color:${props=> props.theme.colors.buttons};
     margin:0;
     text-align: right;
-    font-weight: 700;
+    font-weight: 900;
     padding-right: 2rem;
-    font-size: ${PxToRem(20)};
+    font-size: ${PxToRem(24)};
     ${mediaAdjustments(css`
-        font-size: ${PxToRem(16)};
+        font-size: ${PxToRem(20)};
     `)};
     ${phoneAdjustments(css`
-        font-size: ${PxToRem(16)};
+        font-size: ${PxToRem(20)};
     `)};
     
 `;
@@ -271,9 +271,9 @@ const CheckPayment = styled.div`
     padding-bottom:3.5rem;
     button{
         width: auto;
-        color:${props=> props.theme.colors.marks};
+        color:${props=> props.theme.colors.background};
         border: 1px solid ${props=> props.theme.colors.marks};
-        background-color:${props=> props.theme.colors.white};
+        background-color:${props=> props.theme.colors.marks};
         box-sizing: border-box;
         font-size: ${PxToRem(28)};
         padding: 0.75rem 2rem;
